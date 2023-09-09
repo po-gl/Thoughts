@@ -1,0 +1,11 @@
+.main-menu-panel {
+  background-color: blue;
+  padding: 4px;
+  box-shadow: 5px 5px 0 var(--theme-color) !important;
+}
+
+.main-menu-panel .divider {
+  height: 1px;
+  background: var(--tertiary-color);
+  margin: 5px;
+}

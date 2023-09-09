@@ -1,0 +1,21 @@
+.menu-button {
+  display: flex;
+  align-items: center;
+  min-width: 14em;
+}
+
+.menu-button .svg-inline--fa {
+  font-size: 0.9em;
+  color: var(--primary-color)
+}
+
+.menu-button .menu-text {
+  margin-inline: 8px;
+  color: var(--primary-color);
+  font: inherit;
+}
+
+.menu-button .menu-shortcut-text {
+  color: var(--secondary-color);
+  margin-inline-start: auto;
+}

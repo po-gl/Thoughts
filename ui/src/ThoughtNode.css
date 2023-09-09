@@ -1,0 +1,47 @@
+.thought-node {
+  min-height: 1em;
+  padding: 5px;
+  border-radius: 30px;
+  /* border: 2px solid var(--theme-color); */
+  box-shadow: 2px 2px 0 var(--theme-2nd-color);
+  border: 1px solid var(--primary-color);
+  background: white;
+
+  font: 1.2em sans-serif;
+}
+
+.thought-node .react-flow__handle {
+  opacity: 0;
+}
+
+.thought-node .grow-wrap {
+  display: grid;
+}
+
+.thought-node .grow-wrap::after {
+  /* Used for auto resizing the textarea */
+  content: attr(data-replicated-value) " ";
+  white-space: pre-wrap;
+  visibility: hidden;
+}
+
+.thought-node .grow-wrap>textarea {
+  resize: none;
+  overflow: hidden;
+}
+
+.thought-node .grow-wrap>textarea,
+.thought-node .grow-wrap::after {
+  min-width: 4em;
+  max-width: 14em;
+  background: var(--panel-color);
+  border: 0px;
+  color: var(--primary-color);
+  caret-color: var(--theme-color);
+  outline: none;
+  padding: 0.2em;
+  font: inherit;
+  margin: 8px;
+
+  grid-area: 1 / 1 / 2 / 2;
+}

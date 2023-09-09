@@ -1,0 +1,18 @@
+.sub-controls-panel {
+  display: flex;
+  align-items: center;
+  font-size: 0.8em;
+}
+
+.sub-controls-panel #first {
+  border-radius: var(--radius) 0 0 var(--radius);
+}
+
+.sub-controls-panel #middle {
+  border-radius: 0;
+  border-inline: 1px solid var(--tertiary-color);
+}
+
+.sub-controls-panel #last {
+  border-radius: 0 var(--radius) var(--radius) 0;
+}

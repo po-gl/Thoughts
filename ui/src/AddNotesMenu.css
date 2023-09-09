@@ -1,0 +1,63 @@
+.add-nodes-menu-panel {
+  padding: 4px;
+  box-shadow: 5px 5px 0 var(--theme-color);
+}
+
+.add-nodes-menu-panel ul {
+  padding-inline-start: 10px;
+  margin: 0;
+}
+
+.add-nodes-menu-panel li {
+  display: list-item;
+  list-style-type: disc;
+  font-size: 1.3em;
+  color: var(--primary-color);
+  margin-inline-start: 20px;
+}
+
+.add-nodes-menu-panel li span {
+  position: relative;
+  left: -10px;
+}
+
+.add-nodes-menu-panel input[type="text"] {
+  margin: 3px;
+  background: var(--panel-color);
+  color: var(--primary-color);
+  outline: none;
+  font: inherit;
+  font-size: var(--font-size);
+  padding: 0.2em;
+  caret-color: var(--theme-2nd-color);
+}
+
+.add-nodes-menu-panel .add-nodes-button-span {
+  display: flex;
+  justify-content: end;
+}
+
+.add-nodes-menu-panel .add-nodes-button-span button {
+  margin-inline: 2px;
+  margin-bottom: 2px;
+}
+
+.add-nodes-menu-panel button {
+  font: inherit;
+  padding-block: 0.1em;
+  padding-inline: 0.8em;
+  margin: 0;
+  border: 1px solid var(--secondary-color);
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.25s;
+}
+
+.add-nodes-menu-panel button:hover {
+  /* background-color: color-mix(in srgb, var(--theme-color) 10%, var(--panel-color) 90%); */
+  background-color: var(--panel-color);
+  box-shadow: 3px 3px 0 var(--theme-color);
+  transform: translate(-3px, -3px);
+}
+
+.add-nodes-menu-panel button:active {
+  background-color: color-mix(in srgb, var(--theme-color) 60%, var(--panel-color) 40%);
+}

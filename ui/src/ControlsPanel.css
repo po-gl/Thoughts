@@ -1,0 +1,24 @@
+.controls-panel {
+  display: flex;
+  align-items: center;
+  padding-block: 2px;
+}
+
+.controls-panel button {
+  margin-inline: 4px;
+}
+
+.controls-panel #first {
+  margin-left: 2px;
+}
+
+.controls-panel #last {
+  margin-right: 2px;
+}
+
+.controls-panel .divider {
+  width: 1px;
+  height: 1.6em;
+  background: var(--tertiary-color);
+  margin-inline: 4px;
+}
