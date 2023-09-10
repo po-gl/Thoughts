@@ -35,7 +35,11 @@ function MainMenu() {
           <MenuButton text="Delete map" icon={<FontAwesomeIcon icon={faTrashCan} />} />
           <div className="divider" />
           <MenuButton text="Help" shortcut="?" icon={<FontAwesomeIcon icon={faCircleQuestion} />} />
-          <MenuButton text="Github" icon={<FontAwesomeIcon icon={faGithub} />} />
+          <MenuButton
+            text="Github"
+            link="https://github.com/po-gl/Thoughts"
+            icon={<FontAwesomeIcon icon={faGithub} />}
+          />
         </Panel>
       </DropdownMenu>
     </>
