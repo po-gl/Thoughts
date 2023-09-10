@@ -42,12 +42,28 @@ body {
   background-color: var(--theme-2nd-color);
 }
 
+
 .react-flow__panel {
   border-radius: var(--radius);
   background-color: var(--panel-color);
   color: var(--primary-color);
   border: 1px solid var(--primary-color);
   box-shadow: 2px 2px 0 var(--theme-color);
+  cursor: default;
+}
+
+.react-flow__pane.selection {
+  cursor: default;
+}
+
+.react-flow__selection {
+  background: color-mix(in srgb, var(--theme-color) 8%, transparent);
+  border: 1px dotted color-mix(in srgb, var(--theme-color) 80%, transparent);
+}
+
+.react-flow__nodesselection-rect {
+  background: color-mix(in srgb, var(--theme-color) 8%, transparent);
+  border: 1px dotted color-mix(in srgb, var(--theme-color) 80%, transparent);
 }
 
 .svg-inline--fa {

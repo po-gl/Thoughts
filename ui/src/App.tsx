@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import ReactFlow, { Background, applyEdgeChanges, addEdge, EdgeChange, NodeChange, Connection, Edge, Node, ReactFlowProvider, } from 'reactflow';
+import ReactFlow, { Background, applyEdgeChanges, addEdge, EdgeChange, NodeChange, Connection, Edge, Node, ReactFlowProvider, SelectionMode, } from 'reactflow';
 import 'reactflow/dist/style.css';
 
 import ThoughtNode, { ThoughtData, WidgetType } from './ThoughtNode.tsx';
@@ -52,6 +52,7 @@ const initialEdges: Edge[] = [
 const nodeTypes = { thought: ThoughtNode };
 const edgeTypes = { floating: FloatingEdge };
 
+export type ToolMode = 'panning' | 'selecting';
 
 function App() {
   const [nodes, setNodes] = useState(initialNodes);
@@ -65,6 +66,7 @@ function App() {
   const [isLocked, setIsLocked] = useState(false);
   const [isDraggable, setIsDraggable] = useState(true);
 
+  const [toolMode, setToolMode] = useState<ToolMode>('panning');
 
   const onNodesChange = useCallback(
     (changes: NodeChange[]) => setNodes((nds) => applyNodeChangesWithTypes(changes, nds))
@@ -96,15 +98,20 @@ function App() {
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
-          proOptions={{ hideAttribution: true }}  // personal project
+          proOptions={{ hideAttribution: true }}
           nodeTypes={nodeTypes}
           edgeTypes={edgeTypes}
           nodesDraggable={isDraggable}
           onNodeDragStop={() => updateHistory({ nodes, edges })}
+          selectionMode={SelectionMode.Partial}
+          panOnDrag={toolMode === 'panning'}
+          selectionOnDrag={toolMode === 'selecting'}
         >
           <Background />
           <MainMenu />
           <ControlsPanel
+            toolMode={toolMode}
+            setToolMode={setToolMode}
             isLocked={isLocked}
             toggleLock={toggleLock}
             undo={undo}
