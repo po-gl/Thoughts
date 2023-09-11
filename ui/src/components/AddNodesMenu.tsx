@@ -97,7 +97,7 @@ function AddNodesMenu({ setShouldUpdateLayout }: AddNodesMenuProps) {
           </span>
           <span className='add-nodes-button-span'>
             <button onClick={() => setNodesToAdd([""])}>Clear</button>
-            <button onClick={addNodes}>Add thoughts</button>
+            <button onClick={addNodes} className={generateWithGPT ? 'with-gradient' : ''}>Add thoughts</button>
           </span>
         </Panel>
       </DropdownMenu>

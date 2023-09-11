@@ -48,6 +48,8 @@
 .add-nodes-menu-panel .checkbox-and-label label {
   padding-inline-start: 0.4em;
   font-weight: 600;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .add-nodes-menu-panel .add-nodes-button-span {
@@ -62,15 +64,15 @@
 
 .add-nodes-menu-panel button {
   font: inherit;
+  font-weight: 500;
   padding-block: 0.1em;
   padding-inline: 0.8em;
   margin: 0;
   border: 1px solid var(--secondary-color);
-  transition: transform 0.2s, box-shadow 0.2s, background-color 0.25s;
+  transition: transform 0.2s, background-color 0.25s, box-shadow 0.2s, background 0s;
 }
 
 .add-nodes-menu-panel button:hover {
-  /* background-color: color-mix(in srgb, var(--theme-color) 10%, var(--panel-color) 90%); */
   background-color: var(--panel-color);
   box-shadow: 3px 3px 0 var(--theme-color);
   transform: translate(-3px, -3px);
@@ -78,4 +80,67 @@
 
 .add-nodes-menu-panel button:active {
   background-color: color-mix(in srgb, var(--theme-color) 60%, var(--panel-color) 40%);
+}
+
+.add-nodes-button-span button.with-gradient {
+  position: relative;
+  background: var(--panel-color);
+  transform: translate(0);
+  transform-style: preserve-3d;
+}
+
+.add-nodes-button-span button.with-gradient:hover {
+  box-shadow: none;
+  transform: translate(-3px, -3px);
+}
+
+@property --rotation {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 40deg;
+}
+
+.add-nodes-button-span button.with-gradient:hover::before {
+  --rotation: 40deg;
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(var(--rotation), #ed9891 0%, #ead7c1 51%, #aff0bf 100%);
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  border-radius: calc(var(--radius) - 1px);
+  transform: translate3d(3px, 3px, -1px);
+  transition: --rotation 0.5s;
+  animation: GradientAnimation 5s ease-in-out infinite alternate;
+}
+
+.add-nodes-button-span button.with-gradient:hover::after {
+  --rotation: 40deg;
+  filter: blur(5px);
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(var(--rotation), #ec8c83 0%, #f1dac0 51%, #a7f1ba 100%);
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  border-radius: calc(var(--radius) - 1px);
+  transform: translate3d(3px, 3px, -1px);
+  transition: --rotation 0.5s;
+  animation: GradientAnimation 5s ease-in-out infinite alternate;
+}
+
+@keyframes GradientAnimation {
+  0% {
+    --rotation: 20deg;
+  }
+
+  100% {
+    --rotation: 170deg;
+  }
 }
