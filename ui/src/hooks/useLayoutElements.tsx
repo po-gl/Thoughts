@@ -5,7 +5,7 @@ import collide from './helpers/collide.ts';
 import { useMemo } from 'react';
 
 const simulation_duration_ms = 4000;
-const view_fit_padding = 0.3;
+const view_fit_padding = 0.1;
 
 export type SimNode = Node<ThoughtData, WidgetType> & SimulationNodeDatum;
 

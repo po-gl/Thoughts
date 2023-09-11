@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const animation_duration_ms = 200;
-const view_fit_padding = 0.3;
+const view_fit_padding = 0.1;
 
 function ZoomControls() {
   const reactFlowInstance = useReactFlow();
