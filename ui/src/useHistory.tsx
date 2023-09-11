@@ -7,14 +7,13 @@ export type HistoryState = {
   edges: Edge[]
 }
 
-type useHistoryProps = {
+type Props = {
   initialNodes: Node<ThoughtData, WidgetType>[]
   initialEdges: Edge[]
   setNodes: React.Dispatch<React.SetStateAction<Node<ThoughtData, WidgetType>[]>>
   setEdges: React.Dispatch<React.SetStateAction<Edge[]>>
 }
-
-function useHistory({ initialNodes, initialEdges, setNodes, setEdges }: useHistoryProps) {
+function useHistory({ initialNodes, initialEdges, setNodes, setEdges }: Props) {
   const [currHistoryIndex, setHistoryIndex] = useState(0);
   const [history, setHistory] = useState([{ nodes: initialNodes, edges: initialEdges }] as HistoryState[]);
 
