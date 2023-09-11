@@ -4,7 +4,7 @@ import { ThoughtData, WidgetType } from './ThoughtNode';
 import collide from './collide.ts';
 import { useMemo } from 'react';
 
-const animation_duration_ms = 3000;
+const simulation_duration_ms = 4000;
 const view_fit_padding = 0.3;
 
 export type SimNode = Node<ThoughtData, WidgetType> & SimulationNodeDatum;
@@ -94,14 +94,14 @@ function useLayoutElements({ shouldUpdateLayout, setShouldUpdateLayout, updateMe
 
       setTimeout(() => {
         running = false;
-      }, animation_duration_ms);
+      }, simulation_duration_ms);
     };
 
     if (shouldUpdateLayout) {
       startForceSim();
       setTimeout(() => {
         setShouldUpdateLayout(false);
-      }, animation_duration_ms + 1);
+      }, simulation_duration_ms + 1);
     }
 
     return [true, { startForceSim }];
