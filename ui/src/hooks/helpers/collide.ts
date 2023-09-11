@@ -1,5 +1,5 @@
 import { quadtree } from 'd3-quadtree';
-import { SimNode } from './useLayoutElements';
+import { SimNode } from '../useLayoutElements';
 
 export function collide() {
   let nodes: SimNode[] = [];

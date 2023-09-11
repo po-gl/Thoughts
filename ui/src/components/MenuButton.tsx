@@ -1,4 +1,4 @@
-import './MenuButton.css'
+import './styles/MenuButton.css'
 
 type Props = {
   text: string;

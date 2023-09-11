@@ -2,12 +2,13 @@ import { faFeatherPointed } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useCallback, useContext, useState } from 'react';
 import { Edge, Node, Panel, useReactFlow } from 'reactflow';
-import './AddNotesMenu.css';
-import DropdownMenu from './DropdownMenu';
-import { stringsToNodes } from './util';
-import HistoryContext from './HistoryContext';
-import fetchGeneratedGraph from './api.ts';
+import HistoryContext from '../context/HistoryContext.ts';
+import fetchGeneratedGraph from '../utils/api.ts';
+import { stringsToNodes } from '../utils/conversions.ts';
+import DropdownMenu from './DropdownMenu.tsx';
 import { ThoughtData, WidgetType } from './ThoughtNode.tsx';
+import './styles/AddNotesMenu.css';
+
 
 type AddNodesMenuProps = {
   setShouldUpdateLayout: React.Dispatch<React.SetStateAction<boolean>>,

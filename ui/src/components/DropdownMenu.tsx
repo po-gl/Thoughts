@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import './DropdownMenu.css';
+import './styles/DropdownMenu.css';
 
 type Props = {
   children: ReactNode,

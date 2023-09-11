@@ -1,5 +1,5 @@
 import { Panel, useReactFlow } from 'reactflow';
-import './ZoomControls.css';
+import './styles/ZoomControls.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 

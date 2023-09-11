@@ -4,7 +4,7 @@ import { faBarsStaggered, faCircleNodes } from "@fortawesome/free-solid-svg-icon
 import { faCircleQuestion, faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import './MainMenu.css';
+import './styles/MainMenu.css';
 import DropdownMenu from "./DropdownMenu.tsx";
 import MenuButton from "./MenuButton.tsx";
 

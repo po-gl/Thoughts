@@ -1,7 +1,7 @@
 import { SimulationNodeDatum, forceLink, forceManyBody, forceSimulation, forceX, forceY } from 'd3-force';
 import { Node, useReactFlow, useStore } from 'reactflow';
-import { ThoughtData, WidgetType } from './ThoughtNode';
-import collide from './collide.ts';
+import { ThoughtData, WidgetType } from '../components/ThoughtNode';
+import collide from './helpers/collide.ts';
 import { useMemo } from 'react';
 
 const simulation_duration_ms = 4000;

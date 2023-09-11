@@ -1,16 +1,16 @@
-import { useState, useCallback } from 'react';
-import ReactFlow, { Background, applyEdgeChanges, addEdge, EdgeChange, NodeChange, Connection, Edge, Node, ReactFlowProvider, SelectionMode, } from 'reactflow';
+import { useCallback, useState } from 'react';
+import ReactFlow, { Background, Connection, Edge, EdgeChange, Node, NodeChange, ReactFlowProvider, SelectionMode, addEdge, applyEdgeChanges, } from 'reactflow';
 import 'reactflow/dist/style.css';
 
-import ThoughtNode, { ThoughtData, WidgetType } from './ThoughtNode.tsx';
-import FloatingEdge from './FloatingEdge.tsx';
-import { applyNodeChangesWithTypes } from './util.ts';
-import ControlsPanel from './ControlsPanel.tsx';
-import MainMenu from './MainMenu.tsx';
-import ZoomControls from './ZoomControls.tsx';
-import useHistory from './useHistory.tsx';
-import useLayoutElements from './useLayoutElements.tsx';
-import HistoryContext from './HistoryContext.ts';
+import ControlsPanel from './components/ControlsPanel.tsx';
+import FloatingEdge from './components/FloatingEdge.tsx';
+import MainMenu from './components/MainMenu.tsx';
+import ThoughtNode, { ThoughtData, WidgetType } from './components/ThoughtNode.tsx';
+import ZoomControls from './components/ZoomControls.tsx';
+import HistoryContext from './context/HistoryContext.ts';
+import useHistory from './hooks/useHistory.tsx';
+import useLayoutElements from './hooks/useLayoutElements.tsx';
+import applyNodeChangesWithTypes from './utils/applyNodeChangesWithTypes.ts';
 
 
 const initialNodes: Node<ThoughtData, WidgetType>[] = [

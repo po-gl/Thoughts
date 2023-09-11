@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { Edge, Node } from 'reactflow';
-import { ThoughtData, WidgetType } from './ThoughtNode.tsx';
+import { ThoughtData, WidgetType } from '../components/ThoughtNode.tsx';
 
 export type HistoryState = {
   nodes: Node<ThoughtData, WidgetType>[]

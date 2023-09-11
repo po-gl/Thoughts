@@ -1,4 +1,4 @@
-import { convertSimplifiedGraph } from "./util";
+import { convertSimplifiedGraph } from "./conversions";
 
 const api_endpoint = import.meta.env.VITE_API_ENDPOINT || 'http://localhost:3000/api';
 

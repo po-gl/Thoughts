@@ -1,7 +1,7 @@
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { Handle, Node, Position, useReactFlow } from 'reactflow';
-import './ThoughtNode.css';
-import HistoryContext from "./HistoryContext";
+import './styles/ThoughtNode.css';
+import HistoryContext from "../context/HistoryContext";
 
 export type WidgetType = 'thought';
 
@@ -24,7 +24,7 @@ function ThoughtNode({ id, data, isConnectable }: Props) {
   const onChange = useCallback((event: React.ChangeEvent<HTMLTextAreaElement>) => {
     // debounce for a second then update database
     clearTimeout(debounceDelayId);
-    const cancelable = setTimeout(() => {
+    const cancelable = window.setTimeout(() => {
       const node = getNode(id);
       if (node !== undefined) {
         node.data = { ...node.data, text: event.target.value };

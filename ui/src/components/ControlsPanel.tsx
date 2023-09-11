@@ -2,8 +2,8 @@ import { IconDefinition, faArrowPointer, faHand, faLock, faRotateLeft, faRotateR
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Panel } from 'reactflow';
 import AddNodesMenu from './AddNodesMenu';
-import './ControlsPanel.css';
-import { ToolMode } from './App';
+import './styles/ControlsPanel.css';
+import { ToolMode } from '../App';
 
 
 type ToolButtonProps = {

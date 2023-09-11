@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { HistoryState } from "./useHistory";
+import { HistoryState } from "../hooks/useHistory";
 
 type HistoryContextProps = {
   undo: () => void;

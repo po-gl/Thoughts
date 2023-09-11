@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { getBezierPath, getStraightPath, useStore } from "reactflow";
-import { getEdgeParams } from "./util";
+import getEdgeParams from "../utils/getEdgeParams";
 
 const EDGE_TYPE: 'bezier' | 'straight' = 'straight';
 
