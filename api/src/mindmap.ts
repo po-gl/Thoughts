@@ -1,7 +1,7 @@
 import { ObjectId } from 'mongodb';
 import { getDB } from './db.js';
 
-type MindMap = {
+export type MindMap = {
   _id: ObjectId;
   user: string;
   created: Date;
@@ -43,4 +43,4 @@ async function update(id: string, mindmap: MindMap) {
   return savedMindmap;
 }
 
-export default { get, add, update };
+export default { get, add, update, validate };
