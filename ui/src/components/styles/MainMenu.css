@@ -2,6 +2,7 @@
   background-color: blue;
   padding: 4px;
   box-shadow: 5px 5px 0 var(--theme-color) !important;
+  font-size: 1.0em;
 }
 
 .main-menu-panel .divider {
