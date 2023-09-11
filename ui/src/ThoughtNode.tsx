@@ -52,31 +52,33 @@ function ThoughtNode({ id, data, isConnectable }: Props) {
   }, [data, grow]);
 
   return (
-    <div
-      className="thought-node"
-      onClick={() => {
-        setFocused(true);
-        growTextArea.current?.focus();
-      }}
-    >
-      <Handle type="target" position={Position.Top} isConnectable={isConnectable} />
-      <div className="grow-wrap">
-        <textarea
-          ref={growTextArea}
-          id="text"
-          name="text"
-          placeholder="Thought..."
-          defaultValue={data.text}
-          rows={1}
-          onInput={grow}
-          onChange={onChange}
+    <div className="thought-node-shadow">
+      <div
+        className="thought-node"
+        onClick={() => {
+          setFocused(true);
+          growTextArea.current?.focus();
+        }}
+      >
+        <Handle type="target" position={Position.Top} isConnectable={isConnectable} />
+        <div className="grow-wrap">
+          <textarea
+            ref={growTextArea}
+            id="text"
+            name="text"
+            placeholder="Thought..."
+            defaultValue={data.text}
+            rows={1}
+            onInput={grow}
+            onChange={onChange}
 
-          className={focused ? "nodrag" : ""}
-          style={{ cursor: focused ? "default" : "pointer" }}
-          onBlur={() => setFocused(false)}
-        />
+            className={focused ? "nodrag" : ""}
+            style={{ cursor: focused ? "default" : "pointer" }}
+            onBlur={() => setFocused(false)}
+          />
+        </div>
+        <Handle type="source" position={Position.Bottom} id="a" isConnectable={isConnectable} />
       </div>
-      <Handle type="source" position={Position.Bottom} id="a" isConnectable={isConnectable} />
     </div>
   );
 }
