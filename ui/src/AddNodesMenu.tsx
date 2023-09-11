@@ -1,11 +1,13 @@
 import { faFeatherPointed } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useCallback, useContext, useState } from 'react';
-import { Edge, Panel, useReactFlow } from 'reactflow';
+import { Edge, Node, Panel, useReactFlow } from 'reactflow';
 import './AddNotesMenu.css';
 import DropdownMenu from './DropdownMenu';
-import { randomEdges, stringsToNodes } from './util';
+import { stringsToNodes } from './util';
 import HistoryContext from './HistoryContext';
+import fetchGeneratedGraph from './api.ts';
+import { ThoughtData, WidgetType } from './ThoughtNode.tsx';
 
 type AddNodesMenuProps = {
   setShouldUpdateLayout: React.Dispatch<React.SetStateAction<boolean>>,
@@ -41,12 +43,20 @@ function AddNodesMenu({ setShouldUpdateLayout }: AddNodesMenuProps) {
   const addNodes = useCallback(async () => {
     const filteredNodesToAdd = nodesToAdd.filter(str => str !== "");
     if (filteredNodesToAdd.length === 0) return;
-    const newNodes = stringsToNodes(filteredNodesToAdd);
-    const newEdges: Edge[] = randomEdges(newNodes);
-    // const [newNodes, newEdges] = generateGraphData();
+    setIsShowing(false);
+
+    setNodes([]);
+    setEdges([]);
+
+    let newNodes: Node<ThoughtData, WidgetType>[];
+    let newEdges: Edge[];
+    if (generateWithGPT) {
+      ({ nodes: newNodes, edges: newEdges } = await fetchGeneratedGraph(filteredNodesToAdd));
+    } else {
+      newNodes = stringsToNodes(filteredNodesToAdd);
+      newEdges = [];
+    }
     const setFlow = async () => {
-      setNodes([]);
-      setEdges([]);
       setTimeout(() => {
         setNodes([...newNodes] || []);
         setEdges([...newEdges] || []);
@@ -55,8 +65,7 @@ function AddNodesMenu({ setShouldUpdateLayout }: AddNodesMenuProps) {
     await setFlow();
     setShouldUpdateLayout(true);
     updateHistory({ nodes: newNodes, edges: newEdges });
-    setIsShowing(false);
-  }, [nodesToAdd, setNodes, setEdges, setShouldUpdateLayout, updateHistory]);
+  }, [nodesToAdd, setShouldUpdateLayout, updateHistory, generateWithGPT, setNodes, setEdges]);
 
   return (
     <div className="add-nodes-menu">

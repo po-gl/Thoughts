@@ -5,6 +5,40 @@ export function applyNodeChangesWithTypes(changes: NodeChange[], nodes: Node<Tho
   return applyNodeChanges(changes, nodes) as unknown as Node<ThoughtData, WidgetType>[];
 }
 
+type SimplifiedGraph = {
+  nodes: { id: string, thought: string }[]
+  edges: { justification: string, source_id: string, target_id: string }[]
+}
+export function convertSimplifiedGraph(graph: SimplifiedGraph) {
+  const nodes: Node<ThoughtData, WidgetType>[] = [];
+  const edges: Edge[] = [];
+  const spread = 70;
+
+  for (const { id, thought } of graph.nodes) {
+    nodes.push({
+      id,
+      type: 'thought',
+      position: { x: Math.random() * spread, y: Math.random() * spread },
+      data: {
+        text: thought,
+      }
+    });
+  }
+
+  for (const { justification, source_id, target_id } of graph.edges) {
+    edges.push({
+      id: `${source_id}-${target_id}`,
+      type: 'floating',
+      source: source_id,
+      target: target_id,
+      data: {
+        justification,
+      },
+    });
+  }
+  return { nodes, edges };
+}
+
 export function generateGraphData() {
   const nodes: Node<ThoughtData, WidgetType>[] = [];
   const edges: Edge[] = [];
