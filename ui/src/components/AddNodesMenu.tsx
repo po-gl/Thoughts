@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useCallback, useContext, useState } from 'react';
 import { Edge, Node, Panel, useReactFlow } from 'reactflow';
 import HistoryContext from '../context/HistoryContext.ts';
+import ProgressContext from '../context/ProgressContext.ts';
 import fetchGeneratedGraph from '../utils/api.ts';
 import { stringsToNodes } from '../utils/conversions.ts';
 import DropdownMenu from './DropdownMenu.tsx';
@@ -16,6 +17,7 @@ type AddNodesMenuProps = {
 function AddNodesMenu({ setShouldUpdateLayout }: AddNodesMenuProps) {
   const { setNodes, setEdges } = useReactFlow();
   const { updateHistory } = useContext(HistoryContext);
+  const { setInProgress } = useContext(ProgressContext);
   const [showing, setIsShowing] = useState(false);
   const [generateWithGPT, setGenerateWithGPT] = useState(true);
   const [nodesToAdd, setNodesToAdd] = useState<string[]>(["Fruits", "Fries", "Lies", "And butterflies", ""]);
@@ -52,6 +54,7 @@ function AddNodesMenu({ setShouldUpdateLayout }: AddNodesMenuProps) {
     let newNodes: Node<ThoughtData, WidgetType>[];
     let newEdges: Edge[];
     if (generateWithGPT) {
+      setInProgress(true);
       ({ nodes: newNodes, edges: newEdges } = await fetchGeneratedGraph(filteredNodesToAdd));
     } else {
       newNodes = stringsToNodes(filteredNodesToAdd);
@@ -64,9 +67,11 @@ function AddNodesMenu({ setShouldUpdateLayout }: AddNodesMenuProps) {
       }, 0);
     };
     await setFlow();
+
+    setInProgress(false);
     setShouldUpdateLayout(true);
     updateHistory({ nodes: newNodes, edges: newEdges });
-  }, [nodesToAdd, setShouldUpdateLayout, updateHistory, generateWithGPT, setNodes, setEdges]);
+  }, [nodesToAdd, setShouldUpdateLayout, updateHistory, setInProgress, generateWithGPT, setNodes, setEdges]);
 
   return (
     <div className="add-nodes-menu">
