@@ -8,6 +8,7 @@ import fetchGeneratedGraph from '../utils/api.ts';
 import { stringsToNodes } from '../utils/conversions.ts';
 import DropdownMenu from './DropdownMenu.tsx';
 import { ThoughtData, WidgetType } from './ThoughtNode.tsx';
+import stars from '../assets/stars.svg';
 import './styles/AddNotesMenu.css';
 
 
@@ -97,7 +98,8 @@ function AddNodesMenu({ setShouldUpdateLayout }: AddNodesMenuProps) {
                 onChange={e => setGenerateWithGPT(e.target.checked)}
                 checked={generateWithGPT}
               />
-              <label htmlFor="with-gpt">Generate with GPT ✨</label>
+              <label htmlFor="with-gpt">Generate with GPT</label>
+              <img src={stars} />
             </div>
           </span>
           <span className='add-nodes-button-span'>

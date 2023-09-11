@@ -1,12 +1,14 @@
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { Handle, Node, Position, useReactFlow } from 'reactflow';
 import './styles/ThoughtNode.css';
+import stars from '../assets/stars.svg';
 import HistoryContext from "../context/HistoryContext";
 
 export type WidgetType = 'thought';
 
 export type ThoughtData = {
   text: string
+  isGenerated?: boolean
 };
 
 type Props = {
@@ -76,6 +78,11 @@ function ThoughtNode({ id, data, isConnectable }: Props) {
             style={{ cursor: focused ? "default" : "pointer" }}
             onBlur={() => setFocused(false)}
           />
+        </div>
+        <div className="is-generated">
+          {data.isGenerated && (
+            <img src={stars} />
+          )}
         </div>
         <Handle type="source" position={Position.Bottom} id="a" isConnectable={isConnectable} />
       </div>

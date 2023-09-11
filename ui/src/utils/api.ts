@@ -20,7 +20,16 @@ async function fetchGeneratedGraph(thoughts: string[]) {
     if (result.error) {
       throw new Error(result.error);
     }
-    return convertSimplifiedGraph(result);
+    const { nodes, edges } = convertSimplifiedGraph(result);
+
+    const updatedNodes = nodes.map(node => {
+      if (!thoughts.includes(node.data.text)) {
+        node.data = { ...node.data, isGenerated: true };
+      }
+      return node
+    })
+
+    return { nodes: updatedNodes, edges };
 
   } catch (error) {
     console.log(error);

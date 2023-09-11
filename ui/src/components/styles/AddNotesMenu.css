@@ -52,6 +52,11 @@
   -webkit-user-select: none;
 }
 
+.add-nodes-menu-panel .checkbox-and-label img {
+  margin-inline-start: 0.2em;
+  opacity: 0.8;
+}
+
 .add-nodes-menu-panel .add-nodes-button-span {
   display: flex;
   justify-content: end;

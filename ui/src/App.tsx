@@ -20,7 +20,7 @@ const initialNodes: Node<ThoughtData, WidgetType>[] = [
     id: '1',
     type: 'thought',
     position: { x: -200, y: -200 },
-    data: { text: "I am a thought." },
+    data: { text: "I am a thought.", isGenerated: true },
   },
   {
     id: '2',
