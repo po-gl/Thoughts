@@ -14,7 +14,8 @@ function AddNodesMenu({ setShouldUpdateLayout }: AddNodesMenuProps) {
   const { setNodes, setEdges } = useReactFlow();
   const { updateHistory } = useContext(HistoryContext);
   const [showing, setIsShowing] = useState(false);
-  const [nodesToAdd, setNodesToAdd] = useState<string[]>(["Fruits", "Fries", "Lies", "And butterflies"]);
+  const [generateWithGPT, setGenerateWithGPT] = useState(true);
+  const [nodesToAdd, setNodesToAdd] = useState<string[]>(["Fruits", "Fries", "Lies", "And butterflies", ""]);
 
   const handleInput = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const index = parseInt(e.target.getAttribute('id') ?? "-1");
@@ -74,6 +75,16 @@ function AddNodesMenu({ setShouldUpdateLayout }: AddNodesMenuProps) {
           <ul>
             {addNodeItems}
           </ul>
+          <div className='divider' />
+          <span>
+            <div className="checkbox-and-label">
+              <input type="checkbox" className="checkbox" id="with-gpt"
+                onChange={e => setGenerateWithGPT(e.target.checked)}
+                checked={generateWithGPT}
+              />
+              <label htmlFor="with-gpt">Generate with GPT ✨</label>
+            </div>
+          </span>
           <span className='add-nodes-button-span'>
             <button onClick={() => setNodesToAdd([""])}>Clear</button>
             <button onClick={addNodes}>Add thoughts</button>

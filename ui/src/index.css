@@ -117,6 +117,47 @@ button.activated:hover {
   color: color-mix(in srgb, var(--theme-color) 40%, black 60%);
 }
 
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  display: grid;
+  place-content: center;
+  font: inherit;
+  color: var(--primary-color);
+  background-color: color-mix(in srgb, var(--theme-2nd-color) 30%, transparent);
+  width: 1.15em;
+  height: 1.15em;
+  border: 1px solid var(--primary-color);
+  border-radius: 0.25em;
+  transition:
+    background-color 0.2s,
+    box-shadow 0.2s,
+    transform 0.2s;
+}
+
+input[type="checkbox"]:checked {
+  background-color: color-mix(in srgb, var(--theme-2nd-color) 50%, transparent);
+}
+
+input[type="checkbox"]:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 2px 2px 0 var(--primary-color);
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  width: 0.7em;
+  height: 0.7em;
+  opacity: 0;
+  transition: opacity 0.2s;
+  box-shadow: inset 1em 1em var(--primary-color);
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+input[type="checkbox"]:checked::before {
+  opacity: 1;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

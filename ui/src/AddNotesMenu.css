@@ -1,4 +1,4 @@
-.add-nodes-menu-panel {
+.react-flow__panel.add-nodes-menu-panel {
   padding: 4px;
   box-shadow: 5px 5px 0 var(--theme-color);
 }
@@ -30,6 +30,24 @@
   font-size: var(--font-size);
   padding: 0.2em;
   caret-color: var(--theme-2nd-color);
+}
+
+.add-nodes-menu-panel div.divider {
+  background: var(--tertiary-color);
+  margin: 0.5em auto;
+  width: 95%;
+  height: 1px;
+}
+
+.add-nodes-menu-panel .checkbox-and-label {
+  display: flex;
+  align-items: center;
+  margin: 0.8em 0 1.5em 5px;
+}
+
+.add-nodes-menu-panel .checkbox-and-label label {
+  padding-inline-start: 0.4em;
+  font-weight: 600;
 }
 
 .add-nodes-menu-panel .add-nodes-button-span {
