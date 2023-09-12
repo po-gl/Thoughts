@@ -7,7 +7,7 @@ function ProgressIndicator() {
   const { inProgress } = useContext(ProgressContext);
 
   return (
-    <div className={`progress ${!inProgress ? '' : 'hidden'}`} >
+    <div className={`progress ${inProgress ? '' : 'hidden'}`} >
       <h3>Generation in progress...</h3>
       <h4>(~1min)</h4>
     </div>
