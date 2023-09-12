@@ -1,0 +1,4 @@
+.edge-label {
+  max-width: 12em;
+  transition: opacity 0.25s;
+}

@@ -14,6 +14,7 @@ import ProgressContext from './context/ProgressContext.ts';
 import useHistory from './hooks/useHistory.tsx';
 import useLayoutElements from './hooks/useLayoutElements.tsx';
 import applyNodeChangesWithTypes from './utils/applyNodeChangesWithTypes.ts';
+import SelectedNodeContext from './context/SelectedNodeContext.ts';
 
 
 const initialNodes: Node<ThoughtData, WidgetType>[] = [];
@@ -42,6 +43,8 @@ function App() {
   const [inProgress, setInProgress] = useState(false);
   const [estimatedTimeS, setEstimatedTimeS] = useState(0);
 
+  const [selectedNodeId, setSelectedNodeId] = useState<string | undefined>(undefined);
+
   const onNodesChange = useCallback(
     (changes: NodeChange[]) => {
       setShowWelcome(false);
@@ -68,43 +71,46 @@ function App() {
     <div style={{ width: '100%', height: '100%' }}>
       <HistoryContext.Provider value={{ undo, redo, canUndo, canRedo, updateHistory }}>
         <ProgressContext.Provider value={{ inProgress, setInProgress, estimatedTimeS, setEstimatedTimeS }}>
-          <ReactFlow
-            fitView={true}
-            fitViewOptions={{ padding: 0.3 }}
-            nodes={nodes}
-            edges={edges}
-            onNodesChange={onNodesChange}
-            onEdgesChange={onEdgesChange}
-            onConnect={onConnect}
-            proOptions={{ hideAttribution: true }}
-            nodeTypes={nodeTypes}
-            edgeTypes={edgeTypes}
-            nodesDraggable={isDraggable}
-            onNodeDragStop={() => updateHistory({ nodes, edges })}
-            selectionMode={SelectionMode.Partial}
-            panOnDrag={toolMode === 'panning' && !showWelcome}
-            selectionOnDrag={toolMode === 'selecting'}
-            defaultViewport={{ x: 0, y: 0, zoom: 1.8 }}
-          >
-            <Background />
-            <MainMenu />
-            <ControlsPanel
-              toolMode={toolMode}
-              setToolMode={setToolMode}
-              isLocked={isLocked}
-              toggleLock={toggleLock}
-              undo={undo}
-              redo={redo}
-              canUndo={canUndo}
-              canRedo={canRedo}
-              setShouldUpdateLayout={setShouldUpdateLayout}
-            />
-            <ProgressIndicator />
-            <ZoomControls />
-            {showWelcome &&
-              <WelcomeScreen />
-            }
-          </ReactFlow>
+          <SelectedNodeContext.Provider value={{ selectedNodeId, setSelectedNodeId }}>
+            <ReactFlow
+              fitView={true}
+              fitViewOptions={{ padding: 0.3 }}
+              nodes={nodes}
+              edges={edges}
+              onNodesChange={onNodesChange}
+              onEdgesChange={onEdgesChange}
+              onConnect={onConnect}
+              proOptions={{ hideAttribution: true }}
+              nodeTypes={nodeTypes}
+              edgeTypes={edgeTypes}
+              nodesDraggable={isDraggable}
+              onNodeDragStop={() => updateHistory({ nodes, edges })}
+              onMoveStart={() => setSelectedNodeId(undefined)}
+              selectionMode={SelectionMode.Partial}
+              panOnDrag={toolMode === 'panning' && !showWelcome}
+              selectionOnDrag={toolMode === 'selecting'}
+              defaultViewport={{ x: 0, y: 0, zoom: 1.8 }}
+            >
+              <Background />
+              <MainMenu />
+              <ControlsPanel
+                toolMode={toolMode}
+                setToolMode={setToolMode}
+                isLocked={isLocked}
+                toggleLock={toggleLock}
+                undo={undo}
+                redo={redo}
+                canUndo={canUndo}
+                canRedo={canRedo}
+                setShouldUpdateLayout={setShouldUpdateLayout}
+              />
+              <ProgressIndicator />
+              <ZoomControls />
+              {showWelcome &&
+                <WelcomeScreen />
+              }
+            </ReactFlow>
+          </SelectedNodeContext.Provider>
         </ProgressContext.Provider>
       </HistoryContext.Provider>
     </div>

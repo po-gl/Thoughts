@@ -3,6 +3,7 @@ import { Handle, Node, Position, useReactFlow } from 'reactflow';
 import './styles/ThoughtNode.css';
 import stars from '../assets/stars.svg';
 import HistoryContext from "../context/HistoryContext";
+import SelectedNodeContext from "../context/SelectedNodeContext";
 
 export type WidgetType = 'thought';
 
@@ -19,9 +20,20 @@ type Props = {
 function ThoughtNode({ id, data, isConnectable }: Props) {
   const { getNode, getNodes, getEdges } = useReactFlow();
   const { updateHistory } = useContext(HistoryContext);
+  const { setSelectedNodeId } = useContext(SelectedNodeContext);
+
+  const [focused, setFocused] = useState(false);
 
   const [debounceDelayId, setDebounceDelayId] = useState<number>();
   const debounce_delay_ms = 3000;
+
+  const growTextArea = useRef<HTMLTextAreaElement | null>(null);
+
+  const handleClick = useCallback(() => {
+    setFocused(true);
+    growTextArea.current?.focus();
+    setSelectedNodeId(id);
+  }, [id, setSelectedNodeId]);
 
   const onChange = useCallback((event: React.ChangeEvent<HTMLTextAreaElement>) => {
     // debounce for a second then update database
@@ -38,9 +50,6 @@ function ThoughtNode({ id, data, isConnectable }: Props) {
     setDebounceDelayId(cancelable);
   }, [debounceDelayId, getEdges, getNode, getNodes, id, updateHistory]);
 
-  const growTextArea = useRef<HTMLTextAreaElement | null>(null);
-
-  const [focused, setFocused] = useState(false);
 
   // Used to auto resize textarea
   const grow = useCallback(() => {
@@ -54,13 +63,10 @@ function ThoughtNode({ id, data, isConnectable }: Props) {
   }, [data, grow]);
 
   return (
-    <div className="thought-node-shadow">
+    <div className={`thought-node-shadow ${focused ? 'selected' : ''}`}>
       <div
         className="thought-node"
-        onClick={() => {
-          setFocused(true);
-          growTextArea.current?.focus();
-        }}
+        onClick={handleClick}
       >
         <Handle type="target" position={Position.Top} isConnectable={isConnectable} />
         <div className="grow-wrap">

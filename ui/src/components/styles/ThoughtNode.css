@@ -1,18 +1,23 @@
+.thought-node-shadow {
+  --node-color: var(--theme-2nd-color);
+  border-radius: 30px;
+  box-shadow: 0px 0px 140px color-mix(in srgb, var(--node-color) 40%, transparent 60%);
+}
+
+.thought-node-shadow.selected {
+  --node-color: var(--theme-color);
+}
+
 .thought-node {
   min-height: 1em;
   padding: 5px;
   border-radius: 30px;
   /* border: 2px solid var(--theme-color); */
-  box-shadow: 2px 2px 0 var(--theme-2nd-color);
+  box-shadow: 2px 2px 0 var(--node-color);
   border: 1px solid var(--primary-color);
   background: var(--panel-color);
 
   font: 1.2em sans-serif;
-}
-
-.thought-node-shadow {
-  border-radius: 30px;
-  box-shadow: 0px 0px 140px color-mix(in srgb, var(--theme-2nd-color) 40%, transparent 60%);
 }
 
 .thought-node .react-flow__handle {
@@ -42,7 +47,7 @@
   background: var(--panel-color);
   border: 0px;
   color: var(--primary-color);
-  caret-color: var(--theme-color);
+  caret-color: var(--theme-2nd-color);
   outline: none;
   padding: 0.2em;
   font: inherit;

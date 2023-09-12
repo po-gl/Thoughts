@@ -1,17 +1,16 @@
-import { useCallback } from "react";
-import { getBezierPath, getStraightPath, useStore } from "reactflow";
+import { useCallback, useContext } from "react";
+import { BaseEdge, EdgeLabelRenderer, EdgeProps, getBezierPath, getStraightPath, useStore } from "reactflow";
 import getEdgeParams from "../utils/getEdgeParams";
+import SelectedNodeContext from "../context/SelectedNodeContext";
+import './styles/FloatingEdge.css';
 
 const EDGE_TYPE: 'bezier' | 'straight' = 'straight';
 
-type Props = {
-  id: string,
-  source: string,
-  target: string
-};
-function FloatingEdge({ id, source, target }: Props) {
+function FloatingEdge({ id, source, target, data }: EdgeProps) {
   const sourceNode = useStore(useCallback((store) => store.nodeInternals.get(source), [source]));
   const targetNode = useStore(useCallback((store) => store.nodeInternals.get(target), [target]));
+
+  const { selectedNodeId } = useContext(SelectedNodeContext);
 
   if (!sourceNode || !targetNode) {
     return null;
@@ -19,10 +18,10 @@ function FloatingEdge({ id, source, target }: Props) {
 
   const { sx, sy, tx, ty, sourcePos, targetPos } = getEdgeParams(sourceNode, targetNode, 20);
 
-  let edgePath;
+  let edgePath, labelX, labelY;
   switch (EDGE_TYPE) {
     case 'bezier':
-      [edgePath] = getBezierPath({
+      [edgePath, labelX, labelY] = getBezierPath({
         sourceX: sx,
         sourceY: sy,
         targetX: tx,
@@ -32,7 +31,7 @@ function FloatingEdge({ id, source, target }: Props) {
       });
       break;
     default:
-      [edgePath] = getStraightPath({
+      [edgePath, labelX, labelY] = getStraightPath({
         sourceX: sx,
         sourceY: sy,
         targetX: tx,
@@ -40,12 +39,21 @@ function FloatingEdge({ id, source, target }: Props) {
       });
   }
 
+  const adjacentToSelectedNode = source === selectedNodeId || target === selectedNodeId;
+
   return (
-    <path
-      id={id}
-      className="react-flow__edge-path"
-      d={edgePath}
-    />
+    <>
+      <BaseEdge id={id} path={edgePath} />
+      <EdgeLabelRenderer>
+        <div className="edge-label" style={{
+          position: 'absolute',
+          transform: `translate(-50%, -50%) translate(${labelX}px, ${labelY}px)`,
+          opacity: adjacentToSelectedNode ? 1 : 0.2,
+        }}>
+          {data.justification}
+        </div>
+      </EdgeLabelRenderer>
+    </>
   );
 }
 
