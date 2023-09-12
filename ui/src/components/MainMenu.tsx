@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Panel } from "reactflow";
-import { faBarsStaggered, faCircleNodes } from "@fortawesome/free-solid-svg-icons";
-import { faCircleQuestion, faTrashCan } from "@fortawesome/free-regular-svg-icons";
+import { faBarsStaggered } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './styles/MainMenu.css';
@@ -31,10 +30,7 @@ function MainMenu() {
           className="main-menu-panel"
           style={{ top: '2.8em' }}
         >
-          <MenuButton text="New map" icon={<FontAwesomeIcon icon={faCircleNodes} />} />
-          <MenuButton text="Delete map" icon={<FontAwesomeIcon icon={faTrashCan} />} />
-          <div className="divider" />
-          <MenuButton text="Help" shortcut="?" icon={<FontAwesomeIcon icon={faCircleQuestion} />} />
+          {/* <MenuButton text="Help" shortcut="?" icon={<FontAwesomeIcon icon={faCircleQuestion} />} /> */}
           <MenuButton
             text="Github"
             link="https://github.com/po-gl/Thoughts"
