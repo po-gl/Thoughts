@@ -2,11 +2,12 @@ import './styles/MenuButton.css'
 
 type Props = {
   text: string;
+  onPress?: () => void;
   link?: string;
   shortcut?: string;
   icon: JSX.Element;
 }
-function MenuButton({ text, link = '', shortcut = '', icon }: Props) {
+function MenuButton({ text, link = '', onPress = () => { }, shortcut = '', icon }: Props) {
   if (link !== '') {
     return (
       <a className="menu-button" href={link} target="_blank" >
@@ -17,7 +18,7 @@ function MenuButton({ text, link = '', shortcut = '', icon }: Props) {
     );
   } else {
     return (
-      <button className="menu-button" >
+      <button className="menu-button" onClick={onPress}>
         {icon}
         <div className="menu-text" > {text}</div>
         <div className="menu-shortcut-text">{shortcut}</div>
