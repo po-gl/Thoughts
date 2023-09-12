@@ -1,4 +1,4 @@
-import { IconDefinition, faArrowPointer, faHand, faLock, faRotateLeft, faRotateRight, faUnlock, faWandMagicSparkles } from '@fortawesome/free-solid-svg-icons';
+import { IconDefinition, faArrowPointer, faHand, faLock, faRotateLeft, faRotateRight, faUnlock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Panel } from 'reactflow';
 import AddNodesMenu from './AddNodesMenu';
@@ -57,9 +57,9 @@ function ControlsPanel({ toolMode, setToolMode, isLocked, toggleLock, undo, redo
       <ToolButton toolMode={'selecting'} icon={faArrowPointer} currentToolMode={toolMode} setToolMode={setToolMode} />
       <AddNodesMenu setShouldUpdateLayout={setShouldUpdateLayout} />
 
-      <span className="divider" />
+      {/* <span className="divider" />
 
-      <button onClick={() => console.log('Clicked Assistant')}><FontAwesomeIcon icon={faWandMagicSparkles} /></button>
+      <button onClick={() => console.log('Clicked Assistant')}><FontAwesomeIcon icon={faWandMagicSparkles} /></button> */}
 
       <span className="divider" />
 
