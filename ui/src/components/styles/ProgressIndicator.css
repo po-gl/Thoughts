@@ -1,7 +1,7 @@
 .progress {
   position: fixed;
   right: 2.0em;
-  top: 5px;
+  bottom: 5px;
   display: flex;
   opacity: 1.0;
   transition: opacity 0.4s;
