@@ -5,51 +5,19 @@ import 'reactflow/dist/style.css';
 import ControlsPanel from './components/ControlsPanel.tsx';
 import FloatingEdge from './components/FloatingEdge.tsx';
 import MainMenu from './components/MainMenu.tsx';
+import ProgressIndicator from './components/ProgressIndicator.tsx';
 import ThoughtNode, { ThoughtData, WidgetType } from './components/ThoughtNode.tsx';
+import WelcomeScreen from './components/WelcomeScreen.tsx';
 import ZoomControls from './components/ZoomControls.tsx';
 import HistoryContext from './context/HistoryContext.ts';
+import ProgressContext from './context/ProgressContext.ts';
 import useHistory from './hooks/useHistory.tsx';
 import useLayoutElements from './hooks/useLayoutElements.tsx';
 import applyNodeChangesWithTypes from './utils/applyNodeChangesWithTypes.ts';
-import ProgressContext from './context/ProgressContext.ts';
-import ProgressIndicator from './components/ProgressIndicator.tsx';
 
 
-const initialNodes: Node<ThoughtData, WidgetType>[] = [
-  {
-    id: '1',
-    type: 'thought',
-    position: { x: -200, y: -200 },
-    data: { text: "I am a thought.", isGenerated: true },
-  },
-  {
-    id: '2',
-    type: 'thought',
-    position: { x: 0, y: 200 },
-    data: { text: "" },
-  },
-  {
-    id: '3',
-    type: 'thought',
-    position: { x: 200, y: -140 },
-    data: { text: "I am another" },
-  }
-];
-
-const initialEdges: Edge[] = [
-  {
-    id: '1-2',
-    type: 'floating',
-    source: '1',
-    target: '2'
-  },
-  {
-    id: '1-3',
-    type: 'floating',
-    source: '1',
-    target: '3'
-  },
-];
+const initialNodes: Node<ThoughtData, WidgetType>[] = [];
+const initialEdges: Edge[] = [];
 
 const nodeTypes = { thought: ThoughtNode };
 const edgeTypes = { floating: FloatingEdge };
@@ -57,7 +25,8 @@ const edgeTypes = { floating: FloatingEdge };
 export type ToolMode = 'panning' | 'selecting';
 
 function App() {
-  const [nodes, setNodes] = useState(initialNodes);
+  const [showWelcome, setShowWelcome] = useState(true);
+  const [nodes, setNodes] = useState<Node<ThoughtData, WidgetType>[]>(initialNodes);
   const [edges, setEdges] = useState(initialEdges);
 
   const [undo, redo, canUndo, canRedo, updateHistory] = useHistory({ initialNodes, initialEdges, setNodes, setEdges });
@@ -74,7 +43,10 @@ function App() {
   const [estimatedTimeS, setEstimatedTimeS] = useState(0);
 
   const onNodesChange = useCallback(
-    (changes: NodeChange[]) => setNodes((nds) => applyNodeChangesWithTypes(changes, nds))
+    (changes: NodeChange[]) => {
+      setShowWelcome(false);
+      setNodes((nds) => applyNodeChangesWithTypes(changes, nds))
+    }
     , []
   );
   const onEdgesChange = useCallback(
@@ -110,8 +82,9 @@ function App() {
             nodesDraggable={isDraggable}
             onNodeDragStop={() => updateHistory({ nodes, edges })}
             selectionMode={SelectionMode.Partial}
-            panOnDrag={toolMode === 'panning'}
+            panOnDrag={toolMode === 'panning' && !showWelcome}
             selectionOnDrag={toolMode === 'selecting'}
+            defaultViewport={{ x: 0, y: 0, zoom: 1.8 }}
           >
             <Background />
             <MainMenu />
@@ -128,6 +101,9 @@ function App() {
             />
             <ProgressIndicator />
             <ZoomControls />
+            {showWelcome &&
+              <WelcomeScreen />
+            }
           </ReactFlow>
         </ProgressContext.Provider>
       </HistoryContext.Provider>

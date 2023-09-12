@@ -1,0 +1,80 @@
+.welcome-screen {
+  font-family: "BagnardSans";
+}
+
+.welcome-screen .center {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  min-width: 500px;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome-screen h1 {
+  position: relative;
+  font-size: 5em;
+  text-shadow: 4px 3px 0px var(--theme-color);
+}
+
+.welcome-screen h1::after {
+  position: absolute;
+  content: "";
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  background-color: var(--theme-2nd-color);
+  height: 0.3em;
+  margin: auto;
+  filter: blur(50px);
+  opacity: 0.4;
+}
+
+.welcome-screen p {
+  font-size: 1.4em;
+  text-align: center;
+  color: var(--on-bg-primary-color);
+  text-shadow: 1px 1px 0px #111;
+}
+
+.welcome-screen .controls-panel-hint {
+  display: flex;
+  align-items: baseline;
+  position: fixed;
+  top: 5em;
+  left: 50%;
+  transform: translateX(-2em);
+}
+
+.welcome-screen .controls-panel-hint .hint-arrow {
+  height: 7em;
+}
+
+.welcome-screen .controls-panel-hint h3 {
+  margin-inline-start: 0.6em;
+  transform: translateY(0.6em);
+  font-size: 1.3em;
+  color: var(--on-bg-primary-color);
+  text-shadow: 1px 1px 0px #111;
+  opacity: 0.8;
+}
+
+@media (prefers-color-scheme: dark) {
+  .welcome-screen .controls-panel-hint .hint-arrow {
+    filter: invert();
+    opacity: 0.8;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+
+  .welcome-screen p,
+  .welcome-screen .controls-panel-hint h3 {
+    text-shadow: none;
+  }
+}

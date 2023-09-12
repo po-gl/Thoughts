@@ -18,11 +18,18 @@
   --secondary-color: #6f6f6f;
   --tertiary-color: #d8d8d8;
 
+  --on-bg-primary-color: #dddddd;
+
   --theme-color: #D6705E;
   --theme-2nd-color: #32b9a7;
 
   --radius: 12px;
   --font-size: 1.0rem;
+}
+
+@font-face {
+  font-family: "BagnardSans";
+  src: url("assets/fonts/BagnardSans.otf") format("opentype");
 }
 
 html {
@@ -176,5 +183,7 @@ input[type="checkbox"]:checked::before {
   :root {
     color: #213547;
     background-color: #ffffff;
+
+    --on-bg-primary-color: #282828;
   }
 }
