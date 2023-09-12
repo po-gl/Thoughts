@@ -14,3 +14,8 @@ Features:
 - [ ] Save and export maps
 - [ ] Extend individual nodes
 - [ ] Freeform queries to manipulate graph, including examples
+
+<p align="middle"> 
+  <img align="center" width="370" alt="Welcome screen" src="https://github.com/po-gl/Thoughts/assets/42399205/0b638ec6-f0c8-4b93-b373-07803f183fd6">
+  <img align="center" width="370" alt="Generated screen" src="https://github.com/po-gl/Thoughts/assets/42399205/8ba0015a-67be-477d-8704-60197e8297da">
+</p>
