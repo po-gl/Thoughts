@@ -2,6 +2,7 @@
   position: fixed;
   right: 2.0em;
   top: 5px;
+  display: flex;
   opacity: 1.0;
   transition: opacity 0.4s;
 }
@@ -10,12 +11,16 @@
   opacity: 0;
 }
 
-.progress h3 {
+.progress {
   background: #222 linear-gradient(90deg, #222 0%, #fff 51%, #222 100%) 0 0 no-repeat;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: #ffffff89;
   animation: shine 3.5s ease-in-out infinite;
+}
+
+.progress h4 {
+  margin-inline-start: 0.5em;
 }
 
 @keyframes shine {
