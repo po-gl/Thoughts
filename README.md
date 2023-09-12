@@ -10,12 +10,12 @@ Features:
 - [X] Automatically generate mind maps using OpenAI's GPT API (`gpt-4-0613`)
 - [X] Add list a of thoughts for the model to start from
 - [X] Organize and manipulate nodes with a familiar node-based editor
-- [ ] View GPT's justification for associations
+- [X] View GPT's justification for associations
 - [ ] Save and export maps
 - [ ] Extend individual nodes
 - [ ] Freeform queries to manipulate graph, including examples
 
 <p align="middle"> 
-  <img align="center" width="370" alt="Welcome screen" src="https://github.com/po-gl/Thoughts/assets/42399205/0b638ec6-f0c8-4b93-b373-07803f183fd6">
-  <img align="center" width="370" alt="Generated screen" src="https://github.com/po-gl/Thoughts/assets/42399205/8ba0015a-67be-477d-8704-60197e8297da">
+  <img align="center" width="370" alt="Welcome screen" src="https://github.com/po-gl/Thoughts/assets/42399205/54540dd3-0d31-4e6f-892c-863355cbe9b0">
+  <img align="center" width="370" alt="Generated screen" src="https://github.com/po-gl/Thoughts/assets/42399205/723109fb-3b38-416a-a324-8932db8b85bb">
 </p>
