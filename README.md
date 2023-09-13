@@ -16,6 +16,6 @@ Features:
 - [ ] Freeform queries to manipulate graphs, including examples
 
 <p align="middle"> 
-  <img align="center" width="370" alt="Welcome screen" src="https://github.com/po-gl/Thoughts/assets/42399205/54540dd3-0d31-4e6f-892c-863355cbe9b0">
-  <img align="center" width="370" alt="Generated screen" src="https://github.com/po-gl/Thoughts/assets/42399205/723109fb-3b38-416a-a324-8932db8b85bb">
+  <img align="center" width="370" alt="Welcome screen" src="https://github.com/po-gl/Thoughts/assets/42399205/f7523885-f541-4898-a934-ff8379a8a1fd">
+  <img align="center" width="370" alt="Generated screen" src="https://github.com/po-gl/Thoughts/assets/42399205/6c8f0ce8-950c-48da-b935-c398aff8b421">
 </p>
