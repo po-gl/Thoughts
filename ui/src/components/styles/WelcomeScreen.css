@@ -65,6 +65,10 @@
 }
 
 @media (prefers-color-scheme: dark) {
+  .welcome-screen h1 {
+    color: white;
+  }
+
   .welcome-screen .controls-panel-hint .hint-arrow {
     filter: invert();
     opacity: 0.8;
@@ -72,6 +76,9 @@
 }
 
 @media (prefers-color-scheme: light) {
+  .welcome-screen h1 {
+    color: #111;
+  }
 
   .welcome-screen p,
   .welcome-screen .controls-panel-hint h3 {
