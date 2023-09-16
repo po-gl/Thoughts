@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import dotenv from 'dotenv';
 import OpenAI from 'openai';
+import ml from './ml.js';
 
 dotenv.config();
 
@@ -42,7 +43,7 @@ function validateJSON(json: string) {
 }
 
 async function generateMindmap(topics: string[]) {
-  const openai = getOpenAI();
+  const openai = ml.getOpenAI();
   const topicsStr = topics.join(', ');
   const mapSize = 14;
   const response = await openai.chat.completions.create({
