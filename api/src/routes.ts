@@ -44,7 +44,7 @@ routes.post('/generate-mindmap', async (req, res) => {
   }
 });
 
-routes.get('/openai/test', async (req, res) => {
+routes.get('/ml/test', async (req, res) => {
   const openai = ml.getOpenAI();
   const completion = await openai.chat.completions.create({
     messages: [{ role: 'user', content: 'Say this is a test and then name a random animal' }],
