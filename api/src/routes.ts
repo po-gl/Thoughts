@@ -29,22 +29,19 @@ routes.get('/map/:id', async (req, res) => {
 });
 
 routes.post('/generate-mindmap', async (req, res) => {
-  console.log(req);
   const thoughts: string[] = req.body.thoughts;
   if (thoughts === undefined) {
     res.status(400).send('Bad Request');
     return;
   }
-  const response = await ml.generateMindmap(thoughts);
-  const map = response.choices[0].message.function_call?.arguments;
 
   try {
-    JSON.parse(map as string);
+    const map = await ml.generateMindmap(thoughts);
+    res.send(map);
+
   } catch (e) {
     res.status(500).send({ 'error': 'Generated invalid JSON' })
   }
-
-  res.send(map);
 });
 
 routes.get('/openai/test', async (req, res) => {

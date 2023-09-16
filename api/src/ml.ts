@@ -37,6 +37,9 @@ const mindmapSchema = {
   "required": ["nodes", "edges"],
 }
 
+function validateJSON(json: string) {
+  JSON.parse(json);
+}
 
 async function generateMindmap(topics: string[]) {
   const openai = getOpenAI();
@@ -58,7 +61,9 @@ async function generateMindmap(topics: string[]) {
     functions: [{ name: "make_mind_map", parameters: mindmapSchema }],
     function_call: { name: "make_mind_map" },
   });
-  return response;
+  const map = response.choices[0].message.function_call?.arguments;
+  validateJSON(map as string);
+  return map;
 }
 
 function getOpenAI() {
