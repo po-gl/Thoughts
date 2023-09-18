@@ -39,3 +39,5 @@ print('Inserted', count, 'maps');
 db.maps.createIndex({ user: 1 });
 db.maps.createIndex({ created: 1 });
 db.maps.createIndex({ modified: 1 });
+
+db.deleted_maps.createIndex({ user: 1 });
