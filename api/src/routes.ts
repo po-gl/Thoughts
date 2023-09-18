@@ -30,13 +30,14 @@ routes.get('/map/:id', async (req, res) => {
 
 routes.post('/generate-mindmap', async (req, res) => {
   const thoughts: string[] = req.body.thoughts;
-  if (thoughts === undefined) {
+  const mapSize: number = req.body.mapSize;
+  if (thoughts === undefined || mapSize === undefined) {
     res.status(400).send('Bad Request');
     return;
   }
 
   try {
-    const map = await ml.generateMindmap(thoughts);
+    const map = await ml.generateMindmap(thoughts, mapSize);
     res.send(map);
   } catch (e) {
     res.send({ 'error': 'Generated invalid JSON' })

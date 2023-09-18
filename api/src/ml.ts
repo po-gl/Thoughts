@@ -42,10 +42,9 @@ function validateJSON(json: string) {
   JSON.parse(json);
 }
 
-async function generateMindmap(topics: string[]) {
+async function generateMindmap(topics: string[], mapSize: number) {
   const openai = ml.getOpenAI();
   const topicsStr = topics.join(', ');
-  const mapSize = 14;
   const response = await openai.chat.completions.create({
     model: model,
     temperature: 0.3,
