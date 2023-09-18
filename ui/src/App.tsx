@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import ReactFlow, { Background, Connection, Edge, EdgeChange, Node, NodeChange, ReactFlowProvider, SelectionMode, addEdge, applyEdgeChanges, } from 'reactflow';
+import { Toaster } from 'react-hot-toast';
 import 'reactflow/dist/style.css';
-
 import ControlsPanel from './components/ControlsPanel.tsx';
 import FloatingEdge from './components/FloatingEdge.tsx';
 import MainMenu from './components/MainMenu.tsx';
@@ -113,11 +113,25 @@ function App() {
           </SelectedNodeContext.Provider>
         </ProgressContext.Provider>
       </HistoryContext.Provider>
+      <Toaster
+        position='bottom-center'
+        toastOptions={{
+          className: 'toast',
+          duration: 5000,
+          error: {
+            className: 'toast toast-error',
+            duration: 5000,
+            icon: '❌'
+          },
+          success: {
+            className: 'toast toast-success',
+          }
+        }}
+      />
     </div>
   );
 }
 
-// export default App;
 export default function WrappedApp() {
   return (
     <ReactFlowProvider>
