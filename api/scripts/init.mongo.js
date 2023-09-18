@@ -19,7 +19,7 @@ const initialMaps = [
     modified: new Date('2023-08-30'),
     title: 'My map',
     description: '*placeholder for map description*',
-    graph: '*placeholder for json graph*',
+    graph: '{ "nodes": [ { "id": 1, "text": "test" }, { "id": 2, "text": "test two" } ], "edges": []}',
   },
   {
     user: 'sam',
@@ -27,7 +27,7 @@ const initialMaps = [
     modified: new Date('2023-08-30'),
     title: 'My mind map',
     description: '*placeholder for map description*',
-    graph: '*placeholder for json graph*',
+    graph: '{ "nodes": [ { "id": 1, "text": "test" }, { "id": 2, "text": "test two" } ], "edges": []}',
   },
 ];
 
