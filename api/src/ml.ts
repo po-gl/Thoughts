@@ -42,7 +42,7 @@ function validateJSON(json: string) {
   JSON.parse(json);
 }
 
-async function generateMindmap(topics: string[], mapSize: number) {
+async function generateMindmap(topics: string[], mapSize: number = 8) {
   const openai = ml.getOpenAI();
   const topicsStr = topics.join(', ');
   const response = await openai.chat.completions.create({
