@@ -21,6 +21,7 @@ function AddNodesMenu({ setShouldUpdateLayout }: AddNodesMenuProps) {
   const { setInProgress } = useContext(ProgressContext);
   const [showing, setIsShowing] = useState(false);
   const [generateWithGPT, setGenerateWithGPT] = useState(true);
+  const [mapSize, setMapSize] = useState(6);
   const [nodesToAdd, setNodesToAdd] = useState<string[]>(["Fruits", "Fries", "Lies", "And butterflies", ""]);
 
   const handleInput = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,6 +45,10 @@ function AddNodesMenu({ setShouldUpdateLayout }: AddNodesMenuProps) {
     </span></li>
   ));
 
+  const sanitizedMapSize = useCallback(() => {
+    return Math.max(Math.min(mapSize, 30), 5);
+  }, [mapSize]);
+
   const addNodes = useCallback(async () => {
     const filteredNodesToAdd = nodesToAdd.filter(str => str !== "");
     if (filteredNodesToAdd.length === 0) return;
@@ -56,7 +61,8 @@ function AddNodesMenu({ setShouldUpdateLayout }: AddNodesMenuProps) {
     let newEdges: Edge[];
     if (generateWithGPT) {
       setInProgress(true);
-      ({ nodes: newNodes, edges: newEdges } = await fetchGeneratedGraph(filteredNodesToAdd));
+      const size = sanitizedMapSize();
+      ({ nodes: newNodes, edges: newEdges } = await fetchGeneratedGraph(filteredNodesToAdd, size));
     } else {
       newNodes = stringsToNodes(filteredNodesToAdd);
       newEdges = [];
@@ -72,7 +78,7 @@ function AddNodesMenu({ setShouldUpdateLayout }: AddNodesMenuProps) {
     setInProgress(false);
     setShouldUpdateLayout(true);
     updateHistory({ nodes: newNodes, edges: newEdges });
-  }, [nodesToAdd, setShouldUpdateLayout, updateHistory, setInProgress, generateWithGPT, setNodes, setEdges]);
+  }, [nodesToAdd, setShouldUpdateLayout, updateHistory, setInProgress, generateWithGPT, sanitizedMapSize, setNodes, setEdges]);
 
   return (
     <div className="add-nodes-menu">
@@ -100,6 +106,14 @@ function AddNodesMenu({ setShouldUpdateLayout }: AddNodesMenuProps) {
               />
               <label htmlFor="with-gpt">Generate with GPT</label>
               <img src={stars} />
+            </div>
+          </span>
+          <span>
+            <div className="slider-and-label">
+              <input type="number" id="map-size" min="5" max="30" value={mapSize}
+                onChange={e => setMapSize(parseInt(e.target.value))}
+              />
+              <label htmlFor="map-size">Map size</label>
             </div>
           </span>
           <span className='add-nodes-button-span'>

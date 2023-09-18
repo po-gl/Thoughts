@@ -43,7 +43,7 @@
 .add-nodes-menu-panel .checkbox-and-label {
   display: flex;
   align-items: center;
-  margin: 0.8em 0 1.5em 5px;
+  margin: 0.8em 0 0.8em 5px;
 }
 
 .add-nodes-menu-panel .checkbox-and-label label {
@@ -56,6 +56,30 @@
 .add-nodes-menu-panel .checkbox-and-label img {
   margin-inline-start: 0.2em;
   opacity: 0.8;
+}
+
+.add-nodes-menu-panel .slider-and-label {
+  display: flex;
+  align-items: center;
+  margin: 0.8em 0 1.5em 5px;
+}
+
+.add-nodes-menu-panel .slider-and-label #map-size {
+  font: inherit;
+  background-color: var(--panel-color);
+  color: var(--primary-color);
+  border-style: none;
+  border: 1px solid var(--secondary-color);
+  border-radius: 5px;
+  padding-inline: 0.2em;
+  max-width: 3.2em;
+}
+
+.add-nodes-menu-panel .slider-and-label label {
+  padding-inline-start: 0.4em;
+  font-weight: 600;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .add-nodes-menu-panel .add-nodes-button-span {
