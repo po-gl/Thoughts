@@ -6,6 +6,7 @@ export type MindMap = {
   user: string;
   created: Date;
   modified: Date;
+  deleted?: Date;
   title: string;
   description: string;
   graph: string;
@@ -43,4 +44,41 @@ async function update(id: string, mindmap: MindMap) {
   return savedMindmap;
 }
 
-export default { get, add, update, validate };
+async function remove(id: string) {
+  const db = getDB();
+  const objectId = new ObjectId(id);
+  const mindMap = await db.collection('maps').findOne({ _id: objectId });
+  if (!mindMap) return false;
+
+  mindMap.deleted = new Date();
+
+  const result = await db.collection('deleted_maps').insertOne(mindMap);
+  if (result.insertedId) {
+    const deletedResult = await db.collection('maps').deleteOne({ _id: objectId });
+    return deletedResult.deletedCount === 1;
+  }
+  return false;
+}
+
+async function restore(id: string) {
+  const db = getDB();
+  const objectId = new ObjectId(id);
+  const mindMap = await db.collection('deleted_maps').findOne({ _id: objectId });
+  if (!mindMap) return false;
+
+  const result = await db.collection('maps').insertOne(mindMap);
+  if (result.insertedId) {
+    const deletedResult = await db.collection('deleted_maps').deleteOne({ _id: objectId });
+    return deletedResult.deletedCount === 1;
+  }
+  return false;
+}
+
+export default {
+  get,
+  add,
+  update,
+  delete: remove,
+  restore,
+  validate,
+};
