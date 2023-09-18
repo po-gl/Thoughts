@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import dotenv from 'dotenv';
-import OpenAI from 'openai';
+import { OpenAI } from 'openai';
 import ml from './ml.js';
 
 dotenv.config();

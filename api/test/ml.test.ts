@@ -1,8 +1,8 @@
-import { vi, describe, expect, test, beforeEach } from 'vitest';
+import { jest, describe, expect, test, beforeEach } from '@jest/globals';
 import ml from '../src/ml.js';
 
 beforeEach(() => {
-  const spy = vi.spyOn(ml, 'getOpenAI');
+  const spy = jest.spyOn(ml, 'getOpenAI');
   // @ts-ignore
   spy.mockImplementation(() => {
     const payload = `{
@@ -23,7 +23,7 @@ describe('ml module', () => {
     });
 
     test('an invalid generation throws', async () => {
-      const spy = vi.spyOn(ml, 'getOpenAI');
+      const spy = jest.spyOn(ml, 'getOpenAI');
       // @ts-ignore
       spy.mockImplementation(() => {
         const payload = '{ "malformed": "json }'

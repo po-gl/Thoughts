@@ -1,4 +1,4 @@
-import { describe, expect, test } from 'vitest';
+import { describe, expect, test } from '@jest/globals';
 import mindmap, { MindMap } from '../src/mindmap.js';
 import { ObjectId } from 'mongodb';
 import { beforeEach } from 'node:test';
