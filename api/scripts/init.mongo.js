@@ -1,9 +1,9 @@
 /*
  * Run using the mongo shell:
  * localhost:
- *   mongo thoughtorganizer scripts/init.mongo.js
+ *   mongosh thoughtorganizer scripts/init.mongo.js
  * Atlas:
- *   mongo mongodb+srv://user:pwd@xxx.mongodb.net/thoughtorganizer scripts/init.mongo.js
+ *   mongosh mongodb+srv://user:pwd@xxx.mongodb.net/thoughtorganizer scripts/init.mongo.js
 */
 
 /* global db print */
