@@ -45,13 +45,14 @@ function validateJSON(json: string) {
 async function generateMindmap(topics: string[], mapSize: number = 8) {
   const openai = ml.getOpenAI();
   const topicsStr = topics.join(', ');
+  const mapSizeClamped = Math.max(2, Math.min(mapSize, 30));
   const response = await openai.chat.completions.create({
     model: model,
     temperature: 0.3,
     messages: [
       {
         role: "system",
-        content: `You are a helpful assistant that builds complex mind maps that are around ${mapSize} nodes in size. Connect all related nodes with edges. Only use the functions you have been provided with.`,
+        content: `You are a helpful assistant that builds complex mind maps that are around ${mapSizeClamped} nodes in size. Connect all related nodes with edges. Only use the functions you have been provided with.`,
       },
       {
         role: "user",
