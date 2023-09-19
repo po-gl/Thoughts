@@ -14,6 +14,22 @@ db.deleted_maps.deleteMany({});
 
 const initialMaps = [
   {
+    user: 'tester',
+    created: new Date('2023-08-30'),
+    modified: new Date('2023-08-30'),
+    title: 'Test map',
+    description: '*placeholder for map description*',
+    graph: '{ "nodes": [ { "id": 1, "text": "test" }, { "id": 2, "text": "test two" } ], "edges": []}',
+  },
+  {
+    user: 'tester',
+    created: new Date('2023-09-2'),
+    modified: new Date('2023-09-2'),
+    title: 'Test map 2',
+    description: '*placeholder for map description*',
+    graph: '{ "nodes": [ { "id": 1, "text": "test" }, { "id": 2, "text": "test two" } ], "edges": []}',
+  },
+  {
     user: 'porter',
     created: new Date('2023-08-30'),
     modified: new Date('2023-08-30'),
