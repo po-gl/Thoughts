@@ -19,11 +19,12 @@ routes.get('/', async (req, res) => {
   res.json({ endpoints: route_endpoints });
 });
 
-routes.put('/map', async (req, res) => {
-  res.send('Hia there');
+routes.post('/maps', async (req, res) => {
+  const maps = await mindmap.list(req.body.user);
+  res.send(maps);
 });
 
-routes.get('/map/:id', async (req, res) => {
+routes.get('/maps/:id', async (req, res) => {
   const map = await mindmap.get(req.params.id);
   res.send(map);
 });
