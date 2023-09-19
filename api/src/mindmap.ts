@@ -12,6 +12,12 @@ export type MindMap = {
   graph: string;
 }
 
+async function list(user: string) {
+  const db = getDB();
+  const mindMaps = await db.collection('maps').find({ user }).toArray();
+  return mindMaps;
+}
+
 async function get(id: string) {
   const db = getDB();
   const objectId = new ObjectId(id);
@@ -75,6 +81,7 @@ async function restore(id: string) {
 }
 
 export default {
+  list,
   get,
   add,
   update,
