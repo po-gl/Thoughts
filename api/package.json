@@ -8,9 +8,10 @@
     "start": "node ./dist/server.js",
     "build": "tsc",
     "dev": "tsc-watch --onSuccess \"node ./dist/server.js\"",
-    "test": "jest",
-    "test-watch": "jest --watchAll",
-    "coverage": "jest --collectCoverage"
+    "test": "jest -c jest.config.unit.cjs",
+    "test-watch": "jest --watchAll -c jest.config.unit.cjs",
+    "integration": "jest -c jest.config.integration.cjs",
+    "coverage": "jest --collectCoverage -c jest.config.cjs"
   },
   "author": "Porter Glines",
   "license": "MIT",
