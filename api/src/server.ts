@@ -1,11 +1,13 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import { connectToDB } from './db.js';
+import { closeConnectionToDB, connectToDB } from './db.js';
 import routes from './routes.js';
+import { Server } from 'http';
 
 dotenv.config();
 
 const app = express();
+let server: Server;
 
 app.use(routes);
 
@@ -14,7 +16,7 @@ async function start() {
   try {
     await connectToDB();
 
-    app.listen(port, () => {
+    server = app.listen(port, () => {
       console.log(`API server listening on port ${port}`);
     });
   } catch (err) {
@@ -26,4 +28,9 @@ if (process.env.NODE_ENV !== 'test') {
   start();
 }
 
-export { app };
+async function close() {
+  await closeConnectionToDB();
+  server.close();
+}
+
+export { app, start, close };
