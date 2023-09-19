@@ -67,6 +67,16 @@ async function generateMindmap(topics: string[], mapSize: number = 8) {
   return map;
 }
 
+async function test() {
+  const openai = ml.getOpenAI();
+  const response = await openai.chat.completions.create({
+    messages: [{ role: 'user', content: 'Say this is a test' }],
+    model: 'gpt-3.5-turbo',
+  });
+  const message = response.choices[0].message.content;
+  return message;
+}
+
 function getOpenAI() {
   if (!openai) {
     openai = new OpenAI({
@@ -76,4 +86,4 @@ function getOpenAI() {
   return openai;
 }
 
-export default { getOpenAI, generateMindmap };
+export default { getOpenAI, generateMindmap, test };

@@ -45,12 +45,12 @@ routes.post('/generate-mindmap', async (req, res) => {
 });
 
 routes.get('/ml/test', async (req, res) => {
-  const openai = ml.getOpenAI();
-  const completion = await openai.chat.completions.create({
-    messages: [{ role: 'user', content: 'Say this is a test and then name a random animal' }],
-    model: 'gpt-3.5-turbo',
-  });
-  res.send(completion.choices);
+  try {
+    const message = await ml.test();
+    res.send(message);
+  } catch (e) {
+    res.status(500).send('Error generating message');
+  }
 });
 
 export default routes;
