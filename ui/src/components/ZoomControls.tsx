@@ -1,7 +1,7 @@
 import { Panel, useReactFlow } from 'reactflow';
 import './styles/ZoomControls.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faCompress, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const animation_duration_ms = 200;
 const view_fit_padding = 0.1;
@@ -15,7 +15,7 @@ function ZoomControls() {
         <FontAwesomeIcon icon={faMinus} />
       </button>
       <button id="middle" onClick={() => reactFlowInstance.fitView({ padding: view_fit_padding, duration: animation_duration_ms })} >
-        <FontAwesomeIcon icon={faMagnifyingGlass} />
+        <FontAwesomeIcon icon={faCompress} />
       </button>
       <button id="last" onClick={() => reactFlowInstance.zoomIn({ duration: animation_duration_ms })} >
         <FontAwesomeIcon icon={faPlus} />
