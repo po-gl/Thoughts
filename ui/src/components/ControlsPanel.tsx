@@ -1,4 +1,4 @@
-import { IconDefinition, faArrowPointer, faCircleNodes, faHand, faLock, faRotateLeft, faRotateRight, faUnlock } from '@fortawesome/free-solid-svg-icons';
+import { IconDefinition, faArrowPointer, faHand, faLock, faRotateLeft, faRotateRight, faUnlock, faWind } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Panel } from 'reactflow';
 import AddNodesMenu from './AddNodesMenu';
@@ -67,7 +67,7 @@ function ControlsPanel({ toolMode, setToolMode, isLocked, toggleLock, undo, redo
       <button onClick={redo} disabled={!canRedo}><FontAwesomeIcon icon={faRotateRight} /></button>
 
       <span className="divider" />
-      <button onClick={() => setShouldUpdateLayout(true)}><FontAwesomeIcon icon={faCircleNodes} /></button>
+      <button onClick={() => setShouldUpdateLayout(true)}><FontAwesomeIcon icon={faWind} /></button>
       <LockButton id="last" isLocked={isLocked} toggleLock={toggleLock} />
     </Panel >
   );
