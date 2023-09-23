@@ -10,7 +10,7 @@ const view_fit_padding = 0.1;
 export type SimNode = Node<ThoughtData, WidgetType> & SimulationNodeDatum;
 
 const simulation = forceSimulation()
-  .force('charge', forceManyBody().strength(-1300))
+  .force('charge', forceManyBody().strength(-4500))
   // .force('link', forceLink().distance(10))
   .force('x', forceX().x(0).strength(0.04))
   .force('y', forceY().y(0).strength(0.04))
