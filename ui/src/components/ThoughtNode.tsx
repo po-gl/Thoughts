@@ -63,10 +63,10 @@ function ThoughtNode({ id, data, isConnectable }: Props) {
   }, [data, grow]);
 
   return (
-    <div className={`thought-node-shadow ${focused ? 'selected' : ''}`}>
+    <div className={'thought-node-shadow'}>
       <div
         className="thought-node"
-        onClick={handleClick}
+        onMouseDownCapture={handleClick}
       >
         <Handle type="target" position={Position.Top} isConnectable={isConnectable} />
         <div className="grow-wrap">

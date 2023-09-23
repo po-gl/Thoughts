@@ -1,11 +1,14 @@
-.thought-node-shadow {
+.react-flow__node-thought {
   --node-color: var(--theme-2nd-color);
-  border-radius: 30px;
-  box-shadow: 0px 0px 140px color-mix(in srgb, var(--node-color) 40%, transparent 60%);
 }
 
-.thought-node-shadow.selected {
+.react-flow__node-thought.selected {
   --node-color: var(--theme-color);
+}
+
+.thought-node-shadow {
+  border-radius: 30px;
+  box-shadow: 0px 0px 140px color-mix(in srgb, var(--node-color) 40%, transparent 60%);
 }
 
 .thought-node {
