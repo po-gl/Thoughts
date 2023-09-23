@@ -28,6 +28,7 @@ function useLayoutElements({ shouldUpdateLayout, setShouldUpdateLayout, updateMe
   const initialized = useStore((store) =>
     [...store.nodeInternals.values()].every((node) => node.width && node.height)
   );
+  const cancellableTimeouts: NodeJS.Timeout[] = [];
 
   return useMemo(() => {
     const nodes = getNodes().map((node) => ({ ...node, x: node.position.x, y: node.position.y }));
@@ -91,17 +92,19 @@ function useLayoutElements({ shouldUpdateLayout, setShouldUpdateLayout, updateMe
     const startForceSim = () => {
       running = true;
       window.requestAnimationFrame(tick);
+      cancellableTimeouts.forEach((timeout) => clearTimeout(timeout));
+      cancellableTimeouts.splice(0, cancellableTimeouts.length);
 
-      setTimeout(() => {
+      cancellableTimeouts.push(setTimeout(() => {
         running = false;
-      }, simulation_duration_ms);
+      }, simulation_duration_ms));
     };
 
     if (shouldUpdateLayout) {
       startForceSim();
-      setTimeout(() => {
+      cancellableTimeouts.push(setTimeout(() => {
         setShouldUpdateLayout(false);
-      }, simulation_duration_ms + 1);
+      }, simulation_duration_ms + 1));
     }
 
     return [true, { startForceSim }];
