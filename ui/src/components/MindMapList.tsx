@@ -1,7 +1,7 @@
 import { ObjectId } from "mongodb";
-import MenuButton from "./MenuButton";
 import { ReactFlowJsonObject, useReactFlow } from "reactflow";
 import { useEffect, useState } from "react";
+import MindMapMenuButton from "./MindMapMenuButton";
 
 export type MindMap = {
   _id: ObjectId;
@@ -14,7 +14,10 @@ export type MindMap = {
   graph: string;
 }
 
-function MindMapList({ savedMaps }: { savedMaps: MindMap[] }) {
+type Props = {
+  savedMaps: MindMap[]
+}
+function MindMapList({ savedMaps }: Props) {
   const reactFlowInstance = useReactFlow();
   const [shouldFitView, setShouldFitView] = useState(false);
 
@@ -26,9 +29,9 @@ function MindMapList({ savedMaps }: { savedMaps: MindMap[] }) {
   }, [reactFlowInstance, shouldFitView]);
 
   const mapList = savedMaps.map((mindMap) => (
-    <MenuButton
+    <MindMapMenuButton
       key={mindMap._id.toString()}
-      text={mindMap.title}
+      mindMap={mindMap}
       onPress={async () => {
         const flow: ReactFlowJsonObject = JSON.parse(mindMap.graph);
         reactFlowInstance.setNodes(flow.nodes || []);

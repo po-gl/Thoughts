@@ -1,0 +1,26 @@
+.menu-button.mindmap-button .menu-text.hideOverflow {
+  display: inline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.inner-buttons {
+  margin-inline-start: auto;
+  opacity: 0;
+}
+
+.inner-buttons.showing {
+  opacity: 1;
+}
+
+.inner-buttons .inner-button {
+  border: 1px solid var(--secondary-color);
+  padding: 0.6em;
+  margin-inline-start: 0.2em;
+  font-size: 0.8em;
+}
+
+.inner-buttons .inner-button:hover {
+  background-color: color-mix(in srgb, var(--theme-2nd-color) 30%, var(--panel-color));
+  color: color-mix(in srgb, var(--theme-color) 40%, black 60%);
+}
