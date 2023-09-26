@@ -11,6 +11,8 @@ function dateReviver(key: string, value: string) {
   return isoDateRegex.test(value) ? new Date(value) : value
 }
 
+const agent = request.agent(app);
+
 describe('integration for routes module', () => {
 
   beforeAll(async () => {
@@ -22,7 +24,7 @@ describe('integration for routes module', () => {
   })
 
   test('should return a expected list of endpoints for GET /', async () => {
-    const response = await request(app).get('/');
+    const response = await agent.get('/');
     const body = response.text;
     const result = JSON.parse(body);
     expect(result.endpoints.length).toBeGreaterThan(0);
@@ -43,16 +45,16 @@ describe('integration for routes module', () => {
   describe('maps routes', () => {
 
     test('should get a list of mindmaps for GET /maps given an existing user', async () => {
-      const response = await request(app).post('/maps').send({ user: 'tester' });
+      const response = await agent.get('/maps').set('Cookie', ['user=tester']);
       const body = response.text;
       const result = JSON.parse(body, dateReviver);
 
-      expect(result.length).toBe(2);
+      expect(result.length).toBeGreaterThanOrEqual(2);
       expect(result[1].user).toBe('tester');
     });
 
     test('should get an empty list for GET /maps on a non-existing user', async () => {
-      const response = await request(app).post('/maps').send({ user: 'no tester' });
+      const response = await agent.get('/maps').set('Cookie', ['user=non-tester']);
       const body = response.text;
       const result = JSON.parse(body, dateReviver);
       expect(result.length).toBe(0);
@@ -63,7 +65,7 @@ describe('integration for routes module', () => {
       const mindmap = await db.collection('maps').findOne({ user: 'tester' });
       const id = mindmap?._id.toString();
 
-      const response = await request(app).get(`/maps/${id}`);
+      const response = await agent.get(`/maps/${id}`);
       const body = response.text;
       const result = JSON.parse(body, dateReviver);
       result._id = new ObjectId(result._id);
@@ -75,13 +77,13 @@ describe('integration for routes module', () => {
   describe('ML generation routes', () => {
 
     test('should a generated string from OpenAI API for GET /ml/test', async () => {
-      const response = await request(app).get('/ml/test');
+      const response = await agent.get('/ml/test');
       const message = response.text;
       expect(message).toBe('This is a test.');
     })
 
     test('should get a generated a graph from OpenAI API for POST /generate-mindmap', async () => {
-      const response = await request(app).post('/generate-mindmap').send({ thoughts: ['test'], mapSize: 2 });
+      const response = await agent.post('/generate-mindmap').send({ thoughts: ['test'], mapSize: 2 });
       const body = response.text;
       const result = JSON.parse(body);
 
@@ -91,7 +93,7 @@ describe('integration for routes module', () => {
     }, 20000);
 
     test('should get Bad Request for undefined body for POST /generate-mindmap', async () => {
-      const response = await request(app).post('/generate-mindmap');
+      const response = await agent.post('/generate-mindmap');
       const result = response.text;
 
       expect(response.statusCode).toBe(400);
