@@ -10,3 +10,22 @@
   background: var(--tertiary-color);
   margin: 5px;
 }
+
+.main-menu-panel .list-divider {
+  --height: 1.1em;
+  margin-block: 5px;
+  height: var(--height);
+  background:
+    linear-gradient(135deg, var(--panel-color) 35%, transparent 25%) calc(-1 * var(--height) / 2) 0,
+    linear-gradient(225deg, var(--panel-color) 35%, transparent 25%) calc(-1 * var(--height) / 2) 0,
+    linear-gradient(315deg, var(--panel-color) 35%, transparent 25%),
+    linear-gradient(45deg, var(--panel-color) 35%, transparent 25%);
+  background-size: var(--height) var(--height);
+  background-color: var(--secondary-color);
+  container: size;
+}
+
+.main-menu-panel .mindmap-list {
+  max-height: 40vh;
+  overflow-y: scroll;
+}

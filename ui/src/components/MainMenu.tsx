@@ -1,6 +1,6 @@
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { Panel, useReactFlow } from "reactflow";
-import { faBarsStaggered, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faBarsStaggered, faSave, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './styles/MainMenu.css';
@@ -9,6 +9,7 @@ import MenuButton from "./MenuButton.tsx";
 import HistoryContext from "../context/HistoryContext.ts";
 import { apiFetch } from "../utils/api.ts";
 import toast from "react-hot-toast";
+import MindMapList, { MindMap } from "./MindMapList.tsx";
 
 function MainMenuButton({ onPress }: { onPress: () => void }) {
   return (
@@ -63,6 +64,27 @@ function ClearMapButton() {
 
 function MainMenu() {
   const [showing, setIsShowing] = useState(false);
+  const [savedMaps, setSavedMaps] = useState<MindMap[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await apiFetch('/maps', 'GET');
+      if (!ignore) {
+        const body = await response.text();
+        const result = JSON.parse(body);
+        console.log(result.length);
+        if (result.error === undefined) {
+          setSavedMaps(result);
+        }
+      }
+    }
+
+    let ignore = false;
+    fetchData();
+    return () => {
+      ignore = true;
+    }
+  }, []);
 
   return (
     <>
@@ -74,6 +96,10 @@ function MainMenu() {
           className="main-menu-panel"
           style={{ top: '2.8em' }}
         >
+          <div className="mindmap-list">
+            <MindMapList savedMaps={savedMaps} />
+          </div>
+          <div className="list-divider" />
           <SaveMapButton />
           <ClearMapButton />
           <div className="divider" />
