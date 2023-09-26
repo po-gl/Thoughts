@@ -26,6 +26,7 @@ async function get(id: string) {
 }
 
 function validate(mindmap: MindMap) {
+  if (mindmap.user === undefined) throw new Error('user is a required field');
   JSON.parse(mindmap.graph);
 }
 
@@ -35,8 +36,10 @@ async function add(mindmap: MindMap) {
   const newMindmap = { ...mindmap };
   newMindmap.created = new Date();
   newMindmap.modified = new Date();
+  if (newMindmap.title === undefined) newMindmap.title = 'New Mindmap';
+  if (newMindmap.description === undefined) newMindmap.description = '';
 
-  const result = await db.collection('maps').insertOne(mindmap);
+  const result = await db.collection('maps').insertOne(newMindmap);
   const savedMindmap = await db.collection('maps').findOne({ _id: result.insertedId });
   return savedMindmap;
 }
