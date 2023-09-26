@@ -24,6 +24,9 @@ routes.get('/', async (req, res) => {
 routes.get('/maps', async (req, res) => {
   try {
     const user = req.cookies.user;
+    if (user === undefined) {
+      res.cookie('user', 'tester');
+    }
     const maps = await mindmap.list(user);
     res.send(maps);
   } catch (e) {
