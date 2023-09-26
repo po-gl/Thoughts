@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import mindmap from './mindmap.js';
+import mindmap, { MindMap } from './mindmap.js';
 import ml from './ml.js';
 import bodyParser from 'body-parser';
 
@@ -19,14 +19,32 @@ routes.get('/', async (req, res) => {
   res.json({ endpoints: route_endpoints });
 });
 
+routes.get('/maps', async (req, res) => {
+  try {
+    const maps = await mindmap.list("tester");
+    res.send(maps);
+  } catch (e) {
+    res.json({ error: 'Unable to get maps' });
+  }
+});
+
 routes.post('/maps', async (req, res) => {
-  const maps = await mindmap.list(req.body.user);
-  res.send(maps);
+  try {
+    const map = req.body.mindmap as MindMap;
+    await mindmap.add(map);
+    res.json({ status: 'ok' });
+  } catch (e) {
+    res.json({ error: 'Unable to save map' });
+  }
 });
 
 routes.get('/maps/:id', async (req, res) => {
-  const map = await mindmap.get(req.params.id);
-  res.send(map);
+  try {
+    const map = await mindmap.get(req.params.id);
+    res.send(map);
+  } catch (e) {
+    res.json({ error: `Unable to get map with id: ${req.params.id}` })
+  }
 });
 
 routes.post('/generate-mindmap', async (req, res) => {
@@ -41,7 +59,7 @@ routes.post('/generate-mindmap', async (req, res) => {
     const map = await ml.generateMindmap(thoughts, mapSize);
     res.send(map);
   } catch (e) {
-    res.send({ 'error': 'Generated invalid JSON' })
+    res.json({ error: 'Generated invalid JSON' })
   }
 });
 
