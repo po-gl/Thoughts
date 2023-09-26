@@ -2,8 +2,10 @@ import { Router } from 'express';
 import mindmap, { MindMap } from './mindmap.js';
 import ml from './ml.js';
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 
 const routes: Router = Router();
+routes.use(cookieParser());
 routes.use(bodyParser.json());
 
 routes.get('/', async (req, res) => {
@@ -21,7 +23,8 @@ routes.get('/', async (req, res) => {
 
 routes.get('/maps', async (req, res) => {
   try {
-    const maps = await mindmap.list("tester");
+    const user = req.cookies.user;
+    const maps = await mindmap.list(user);
     res.send(maps);
   } catch (e) {
     res.json({ error: 'Unable to get maps' });
