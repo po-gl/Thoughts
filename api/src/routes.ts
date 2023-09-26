@@ -53,6 +53,15 @@ routes.get('/maps/:id', async (req, res) => {
   }
 });
 
+routes.delete('/maps/:id', async (req, res) => {
+  try {
+    const map = await mindmap.delete(req.params.id);
+    res.send(map);
+  } catch (e) {
+    res.status(500).json({ error: `Unable to delete map with id: ${req.params.id}` })
+  }
+});
+
 routes.post('/generate-mindmap', async (req, res) => {
   const thoughts: string[] = req.body.thoughts;
   const mapSize: number = req.body.mapSize;
