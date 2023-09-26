@@ -3,6 +3,9 @@
   padding: 4px;
   box-shadow: 5px 5px 0 var(--theme-color) !important;
   font-size: 1.0em;
+  min-width: 12em;
+  max-width: 18em;
+  white-space: nowrap;
 }
 
 .main-menu-panel .divider {
@@ -16,10 +19,10 @@
   margin-block: 5px;
   height: var(--height);
   background:
-    linear-gradient(135deg, var(--panel-color) 35%, transparent 25%) calc(-1 * var(--height) / 2) 0,
-    linear-gradient(225deg, var(--panel-color) 35%, transparent 25%) calc(-1 * var(--height) / 2) 0,
+    linear-gradient(135deg, var(--panel-color) 34%, transparent 25%) calc(-1 * var(--height) / 2) 0,
+    linear-gradient(225deg, var(--panel-color) 34%, transparent 25%) calc(-1 * var(--height) / 2) 0,
     linear-gradient(315deg, var(--panel-color) 35%, transparent 25%),
-    linear-gradient(45deg, var(--panel-color) 35%, transparent 25%);
+    linear-gradient(45deg, var(--panel-color) 34%, transparent 25%);
   background-size: var(--height) var(--height);
   background-color: var(--secondary-color);
   container: size;
