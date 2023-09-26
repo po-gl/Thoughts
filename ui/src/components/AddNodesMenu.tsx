@@ -4,7 +4,7 @@ import { useCallback, useContext, useState } from 'react';
 import { Edge, Node, Panel, useReactFlow } from 'reactflow';
 import HistoryContext from '../context/HistoryContext.ts';
 import ProgressContext from '../context/ProgressContext.ts';
-import fetchGeneratedGraph from '../utils/api.ts';
+import { fetchGeneratedGraph } from '../utils/api.ts';
 import { stringsToNodes } from '../utils/conversions.ts';
 import DropdownMenu from './DropdownMenu.tsx';
 import { ThoughtData, WidgetType } from './ThoughtNode.tsx';

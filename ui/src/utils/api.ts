@@ -45,4 +45,4 @@ async function fetchGeneratedGraph(thoughts: string[], mapSize: number) {
   return { nodes: [], edges: [] };
 }
 
-export default fetchGeneratedGraph;
+export { fetchGeneratedGraph, apiFetch };
