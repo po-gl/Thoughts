@@ -43,7 +43,7 @@ function SaveMapButton() {
   }, [reactFlowInstance]);
 
   return (
-    <MenuButton text="Save map" onPress={saveMap} icon={<FontAwesomeIcon icon={faSave} />} />
+    <MenuButton text="Save as new map" onPress={saveMap} icon={<FontAwesomeIcon icon={faSave} />} />
   )
 }
 
