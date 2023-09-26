@@ -9,6 +9,9 @@
 .thought-node-shadow {
   border-radius: 30px;
   box-shadow: 0px 0px 140px color-mix(in srgb, var(--node-color) 40%, transparent 60%);
+  animation: fadeInAnimation ease 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
 }
 
 .thought-node {
@@ -65,4 +68,14 @@
   right: 0.2em;
   transform: scale(0.8);
   opacity: 0.5;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
