@@ -48,7 +48,7 @@
   position: fixed;
   top: 5em;
   left: 50%;
-  transform: translateX(-2em);
+  transform: translateX(-3.5em);
 }
 
 .welcome-screen .controls-panel-hint .hint-arrow {
