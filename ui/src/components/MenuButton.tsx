@@ -5,7 +5,7 @@ type Props = {
   onPress?: () => void;
   link?: string;
   shortcut?: string;
-  icon: JSX.Element;
+  icon?: JSX.Element;
 }
 function MenuButton({ text, link = '', onPress = () => { }, shortcut = '', icon }: Props) {
   if (link !== '') {
