@@ -7,6 +7,8 @@ import './styles/MainMenu.css';
 import DropdownMenu from "./DropdownMenu.tsx";
 import MenuButton from "./MenuButton.tsx";
 import HistoryContext from "../context/HistoryContext.ts";
+import { apiFetch } from "../utils/api.ts";
+import toast from "react-hot-toast";
 
 function MainMenuButton({ onPress }: { onPress: () => void }) {
   return (
@@ -16,6 +18,32 @@ function MainMenuButton({ onPress }: { onPress: () => void }) {
       </button>
     </Panel>
   );
+}
+
+function SaveMapButton() {
+
+  const reactFlowInstance = useReactFlow();
+
+  const saveMap = useCallback(async () => {
+    const mindmap = {
+      user: 'tester',
+      graph: JSON.stringify(reactFlowInstance.toObject())
+    }
+    const response = await apiFetch('/maps', 'POST', { mindmap });
+    const body = await response.text();
+    const result = JSON.parse(body);
+
+    if (result.status === 'ok') {
+      toast.success('Map saved.');
+    } else {
+      toast.error("There was an error saving the map.");
+    }
+
+  }, [reactFlowInstance]);
+
+  return (
+    <MenuButton text="Save map" onPress={saveMap} icon={<FontAwesomeIcon icon={faSave} />} />
+  )
 }
 
 function ClearMapButton() {
@@ -46,6 +74,7 @@ function MainMenu() {
           className="main-menu-panel"
           style={{ top: '2.8em' }}
         >
+          <SaveMapButton />
           <ClearMapButton />
           <div className="divider" />
           {/* <MenuButton text="Help" shortcut="?" icon={<FontAwesomeIcon icon={faCircleQuestion} />} /> */}
