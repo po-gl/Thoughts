@@ -37,8 +37,8 @@ routes.get('/maps', async (req, res) => {
 routes.post('/maps', async (req, res) => {
   try {
     const map = req.body.mindmap as MindMap;
-    await mindmap.add(map);
-    res.json({ status: 'ok' });
+    const savedMap = await mindmap.add(map);
+    res.json({ savedMap });
   } catch (e) {
     res.json({ error: 'Unable to save map' });
   }
