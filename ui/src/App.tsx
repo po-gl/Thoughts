@@ -32,7 +32,7 @@ function App() {
   const [nodes, setNodes] = useState<Node<ThoughtData, WidgetType>[]>(initialNodes);
   const [edges, setEdges] = useState(initialEdges);
 
-  const [undo, redo, canUndo, canRedo, updateHistory] = useHistory({ initialNodes, initialEdges, setNodes, setEdges });
+  const [undo, redo, canUndo, canRedo, updateHistory, resetHistory] = useHistory({ initialNodes, initialEdges, setNodes, setEdges });
 
   const [shouldUpdateLayout, setShouldUpdateLayout] = useState(false);
   useLayoutElements({ shouldUpdateLayout, setShouldUpdateLayout, updateMemo: undo });
@@ -74,7 +74,7 @@ function App() {
 
   return (
     <div style={{ width: '100%', height: '100%' }}>
-      <HistoryContext.Provider value={{ undo, redo, canUndo, canRedo, updateHistory }}>
+      <HistoryContext.Provider value={{ undo, redo, canUndo, canRedo, updateHistory, resetHistory }}>
         <ProgressContext.Provider value={{ inProgress, setInProgress, estimatedTimeS, setEstimatedTimeS }}>
           <SelectedNodeContext.Provider value={{ selectedNodeId, setSelectedNodeId }}>
             <ReactFlow

@@ -7,6 +7,7 @@ type HistoryContextProps = {
   canUndo: boolean;
   canRedo: boolean;
   updateHistory: (history: HistoryState) => void;
+  resetHistory: (history: HistoryState) => void;
 }
 
 const HistoryContext = createContext<HistoryContextProps>({
@@ -14,7 +15,8 @@ const HistoryContext = createContext<HistoryContextProps>({
   redo: () => { },
   canUndo: false,
   canRedo: false,
-  updateHistory: () => { }
+  updateHistory: () => { },
+  resetHistory: () => { }
 });
 
 export default HistoryContext;

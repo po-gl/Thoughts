@@ -60,11 +60,16 @@ function useHistory({ initialNodes, initialEdges, setNodes, setEdges }: Props) {
     setHistoryIndex(prev => prev + 1);
   }, [currHistoryIndex]);
 
+  const resetHistory = useCallback(({ nodes = [], edges = [] }: HistoryState) => {
+    setHistory([{ nodes, edges }]);
+    setHistoryIndex(0);
+  }, [])
+
   const canUndo = currHistoryIndex > 0;
 
   const canRedo = currHistoryIndex < history.length - 1;
 
-  return [undo, redo, canUndo, canRedo, updateHistory] as const;
+  return [undo, redo, canUndo, canRedo, updateHistory, resetHistory] as const;
 }
 
 export default useHistory;
