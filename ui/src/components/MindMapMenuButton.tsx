@@ -11,8 +11,9 @@ import { useReactFlow } from 'reactflow';
 type Props = {
   mindMap: MindMap;
   onPress: () => void;
+  setShouldRefreshMaps: React.Dispatch<React.SetStateAction<boolean>>;
 }
-function MindMapMenuButton({ mindMap, onPress }: Props) {
+function MindMapMenuButton({ mindMap, onPress, setShouldRefreshMaps }: Props) {
   const reactFlowInstance = useReactFlow();
 
   const onRename = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
@@ -28,11 +29,12 @@ function MindMapMenuButton({ mindMap, onPress }: Props) {
       toast.success('Map deleted.');
       reactFlowInstance.setNodes([]);
       reactFlowInstance.setEdges([]);
+      setShouldRefreshMaps(true);
       // Navigate with router
     } else {
       toast.error('There was an error deleting the map.');
     }
-  }, [mindMap._id, reactFlowInstance]);
+  }, [mindMap._id, reactFlowInstance, setShouldRefreshMaps]);
 
   return (
     <button className="menu-button mindmap-button" onClick={onPress} >

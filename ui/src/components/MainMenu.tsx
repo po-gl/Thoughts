@@ -21,7 +21,10 @@ function MainMenuButton({ onPress }: { onPress: () => void }) {
   );
 }
 
-function SaveMapButton() {
+type Props = {
+  setShouldRefreshMaps: React.Dispatch<React.SetStateAction<boolean>>;
+}
+function SaveMapButton({ setShouldRefreshMaps }: Props) {
 
   const reactFlowInstance = useReactFlow();
 
@@ -36,11 +39,12 @@ function SaveMapButton() {
 
     if (result.status === 'ok') {
       toast.success('Map saved.');
+      setShouldRefreshMaps(true);
     } else {
       toast.error("There was an error saving the map.");
     }
 
-  }, [reactFlowInstance]);
+  }, [reactFlowInstance, setShouldRefreshMaps]);
 
   return (
     <MenuButton text="Save as new map" onPress={saveMap} icon={<FontAwesomeIcon icon={faSave} />} />
@@ -65,6 +69,7 @@ function ClearMapButton() {
 function MainMenu() {
   const [showing, setIsShowing] = useState(false);
   const [savedMaps, setSavedMaps] = useState<MindMap[]>([]);
+  const [shouldRefreshMaps, setShouldRefreshMaps] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -81,10 +86,11 @@ function MainMenu() {
 
     let ignore = false;
     fetchData();
+    setShouldRefreshMaps(false);
     return () => {
       ignore = true;
     }
-  }, []);
+  }, [shouldRefreshMaps]);
 
   return (
     <>
@@ -97,10 +103,14 @@ function MainMenu() {
           style={{ top: '2.8em' }}
         >
           <div className="mindmap-list">
-            <MindMapList savedMaps={savedMaps} setMainMenuIsShowing={setIsShowing} />
+            <MindMapList
+              savedMaps={savedMaps}
+              setMainMenuIsShowing={setIsShowing}
+              setShouldRefreshMaps={setShouldRefreshMaps}
+            />
           </div>
           <div className="list-divider" />
-          <SaveMapButton />
+          <SaveMapButton setShouldRefreshMaps={setShouldRefreshMaps} />
           <ClearMapButton />
           <div className="divider" />
           {/* <MenuButton text="Help" shortcut="?" icon={<FontAwesomeIcon icon={faCircleQuestion} />} /> */}
