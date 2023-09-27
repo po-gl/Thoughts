@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useSearchParams } from "react-router-dom";
-import { ReactFlowJsonObject, useReactFlow } from "reactflow";
+import { Edge, Node, ReactFlowJsonObject, useReactFlow } from "reactflow";
 import { MindMap } from "../components/MindMapList";
+import { ThoughtData, WidgetType } from "../components/ThoughtNode";
 import { apiFetch } from "../utils/api";
+import { HistoryState } from "./useHistory";
 
-function useMapsRoutes() {
+type Props = {
+  resetHistory: ({ nodes, edges }: HistoryState) => void
+}
+function useMapsRoutes({ resetHistory }: Props) {
   const reactFlowInstance = useReactFlow();
   const [shouldFitView, setShouldFitView] = useState(false);
   const [searchParams,] = useSearchParams();
@@ -27,9 +32,12 @@ function useMapsRoutes() {
       if (!ignore) {
         if (mindMap !== undefined) {
           const flow: ReactFlowJsonObject = JSON.parse(mindMap.graph);
-          reactFlowInstance.setNodes(flow.nodes || []);
-          reactFlowInstance.setEdges(flow.edges || []);
+          const nodes = flow.nodes || [];
+          const edges = flow.edges || [];
+          reactFlowInstance.setNodes(nodes);
+          reactFlowInstance.setEdges(edges);
           setShouldFitView(true);
+          resetHistory({ nodes: nodes as Node<ThoughtData, WidgetType>[], edges: edges as Edge[] });
         } else if (mapId) {
           toast.error("Map not found.");
         }
@@ -40,7 +48,7 @@ function useMapsRoutes() {
     return () => {
       ignore = true;
     }
-  }, [searchParams, reactFlowInstance])
+  }, [searchParams, reactFlowInstance, resetHistory])
 
   useEffect(() => {
     if (shouldFitView) {

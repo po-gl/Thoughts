@@ -69,7 +69,7 @@ function App() {
     setIsLocked(prev => !prev);
   }, []);
 
-  useMapsRoutes();
+  useMapsRoutes({ resetHistory });
 
 
   return (
