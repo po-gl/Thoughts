@@ -55,8 +55,8 @@ routes.get('/maps/:id', async (req, res) => {
 
 routes.delete('/maps/:id', async (req, res) => {
   try {
-    const map = await mindmap.delete(req.params.id);
-    res.send(map);
+    const wasDeleted = await mindmap.delete(req.params.id);
+    res.send(wasDeleted);
   } catch (e) {
     res.status(500).json({ error: `Unable to delete map with id: ${req.params.id}` })
   }
