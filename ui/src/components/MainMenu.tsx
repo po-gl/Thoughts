@@ -97,7 +97,7 @@ function MainMenu() {
           style={{ top: '2.8em' }}
         >
           <div className="mindmap-list">
-            <MindMapList savedMaps={savedMaps} />
+            <MindMapList savedMaps={savedMaps} setMainMenuIsShowing={setIsShowing} />
           </div>
           <div className="list-divider" />
           <SaveMapButton />

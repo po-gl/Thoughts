@@ -15,8 +15,9 @@ export type MindMap = {
 
 type Props = {
   savedMaps: MindMap[]
+  setMainMenuIsShowing: React.Dispatch<React.SetStateAction<boolean>>
 }
-function MindMapList({ savedMaps }: Props) {
+function MindMapList({ savedMaps, setMainMenuIsShowing }: Props) {
   const [, setSearchParams] = useSearchParams();
 
   const mapList = savedMaps.map((mindMap) => (
@@ -24,6 +25,7 @@ function MindMapList({ savedMaps }: Props) {
       key={mindMap._id.toString()}
       mindMap={mindMap}
       onPress={async () => {
+        setMainMenuIsShowing(false);
         setSearchParams({ map: mindMap._id.toString() });
       }}
     />
