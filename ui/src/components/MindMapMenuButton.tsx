@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { MindMap } from './MindMapList';
 import './styles/MenuButton.css';
 import './styles/MindMapMenuButton.css';
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { apiFetch } from '../utils/api';
 import toast from 'react-hot-toast';
 import { useReactFlow } from 'reactflow';
@@ -13,7 +13,6 @@ type Props = {
   onPress: () => void;
 }
 function MindMapMenuButton({ mindMap, onPress }: Props) {
-  const [showInnerButtons, setShowInnerButtons] = useState(false);
   const reactFlowInstance = useReactFlow();
 
   const onRename = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
@@ -36,16 +35,11 @@ function MindMapMenuButton({ mindMap, onPress }: Props) {
   }, [mindMap._id, reactFlowInstance]);
 
   return (
-    <button
-      className="menu-button mindmap-button"
-      onClick={onPress}
-      onMouseEnter={() => setShowInnerButtons(true)}
-      onMouseLeave={() => setShowInnerButtons(false)}
-    >
-      <div className={`menu-text ${showInnerButtons ? 'hideOverflow' : ''}`} >
+    <button className="menu-button mindmap-button" onClick={onPress} >
+      <div className="menu-text" >
         {`${mindMap.title} ${mindMap._id.toString().slice(-10)}`}
       </div>
-      <div className={`inner-buttons ${showInnerButtons ? 'showing' : ''}`}>
+      <div className="inner-buttons">
         <button className="inner-button" onClick={onRename}>
           <FontAwesomeIcon icon={faPenToSquare} />
         </button>

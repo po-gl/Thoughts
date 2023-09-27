@@ -1,4 +1,4 @@
-.menu-button.mindmap-button .menu-text.hideOverflow {
+.menu-button.mindmap-button .menu-text {
   display: inline;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -6,17 +6,15 @@
 
 .inner-buttons {
   margin-inline-start: auto;
-  opacity: 0;
-}
-
-.inner-buttons.showing {
-  opacity: 1;
 }
 
 .inner-buttons .inner-button {
   border: 1px solid var(--secondary-color);
+  filter: drop-shadow(2px 2px 0px var(--theme-2nd-color));
   padding: 0.6em;
   margin-inline-start: 0.2em;
+  width: 2.4em;
+  height: 2.4em;
   font-size: 0.8em;
 }
 
