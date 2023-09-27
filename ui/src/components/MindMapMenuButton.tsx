@@ -1,12 +1,13 @@
 import { faPenToSquare, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useCallback } from 'react';
+import toast from 'react-hot-toast';
+import { useSearchParams } from 'react-router-dom';
+import { useReactFlow } from 'reactflow';
+import { apiFetch } from '../utils/api';
 import { MindMap } from './MindMapList';
 import './styles/MenuButton.css';
 import './styles/MindMapMenuButton.css';
-import { useCallback } from 'react';
-import { apiFetch } from '../utils/api';
-import toast from 'react-hot-toast';
-import { useReactFlow } from 'reactflow';
 
 type Props = {
   mindMap: MindMap;
@@ -15,6 +16,7 @@ type Props = {
 }
 function MindMapMenuButton({ mindMap, onPress, setShouldRefreshMaps }: Props) {
   const reactFlowInstance = useReactFlow();
+  const [, setSearchParams] = useSearchParams();
 
   const onRename = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
@@ -30,11 +32,11 @@ function MindMapMenuButton({ mindMap, onPress, setShouldRefreshMaps }: Props) {
       reactFlowInstance.setNodes([]);
       reactFlowInstance.setEdges([]);
       setShouldRefreshMaps(true);
-      // Navigate with router
+      setSearchParams({});
     } else {
       toast.error('There was an error deleting the map.');
     }
-  }, [mindMap._id, reactFlowInstance, setShouldRefreshMaps]);
+  }, [mindMap._id, reactFlowInstance, setShouldRefreshMaps, setSearchParams]);
 
   return (
     <button className="menu-button mindmap-button" onClick={onPress} >
