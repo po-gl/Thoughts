@@ -10,6 +10,7 @@ import HistoryContext from "../context/HistoryContext.ts";
 import { apiFetch } from "../utils/api.ts";
 import toast from "react-hot-toast";
 import MindMapList, { MindMap } from "./MindMapList.tsx";
+import { useSearchParams } from "react-router-dom";
 
 function MainMenuButton({ onPress }: { onPress: () => void }) {
   return (
@@ -25,8 +26,8 @@ type Props = {
   setShouldRefreshMaps: React.Dispatch<React.SetStateAction<boolean>>;
 }
 function SaveMapButton({ setShouldRefreshMaps }: Props) {
-
   const reactFlowInstance = useReactFlow();
+  const [, setSearchParams] = useSearchParams();
 
   const saveMap = useCallback(async () => {
     const mindmap = {
@@ -37,14 +38,16 @@ function SaveMapButton({ setShouldRefreshMaps }: Props) {
     const body = await response.text();
     const result = JSON.parse(body);
 
-    if (result.status === 'ok') {
+    if (result.error === undefined) {
       toast.success('Map saved.');
+      const id = result.savedMap._id.toString();
+      setSearchParams({ map: id });
       setShouldRefreshMaps(true);
     } else {
       toast.error("There was an error saving the map.");
     }
 
-  }, [reactFlowInstance, setShouldRefreshMaps]);
+  }, [reactFlowInstance, setShouldRefreshMaps, setSearchParams]);
 
   return (
     <MenuButton text="Save as new map" onPress={saveMap} icon={<FontAwesomeIcon icon={faSave} />} />
