@@ -74,7 +74,6 @@ function MindMapMenuButton({ mindMap, onPress, setShouldRefreshMaps }: Props) {
       <Modal
         showing={showRenameModal}
         onDismiss={() => {
-          console.log('Dismiss called')
           setShowRenameModal(false)
         }}
         actionName='Rename'

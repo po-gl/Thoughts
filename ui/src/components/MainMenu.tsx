@@ -80,7 +80,6 @@ function MainMenu() {
       if (!ignore) {
         const body = await response.text();
         const result = JSON.parse(body);
-        console.log(result.length);
         if (result.error === undefined) {
           setSavedMaps(result);
         }

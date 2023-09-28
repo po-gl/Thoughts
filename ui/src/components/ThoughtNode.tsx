@@ -45,7 +45,6 @@ function ThoughtNode({ id, data, isConnectable }: Props) {
       }
       updateHistory({ nodes: getNodes() as Node<ThoughtData, WidgetType>[], edges: getEdges() });
     }, debounce_delay_ms);
-    console.log(`debounceDelayId: ${cancelable}`);
 
     setDebounceDelayId(cancelable);
   }, [debounceDelayId, getEdges, getNode, getNodes, id, updateHistory]);
