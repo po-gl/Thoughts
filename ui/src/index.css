@@ -22,6 +22,7 @@
 
   --theme-color: #D6705E;
   --theme-2nd-color: #32b9a7;
+  --theme-3rd-color: #e1b959;
 
   --error-color: #ffbfcb;
 
@@ -201,5 +202,15 @@ input[type="checkbox"]:checked::before {
     background-color: #ffffff;
 
     --on-bg-primary-color: #282828;
+  }
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
   }
 }
