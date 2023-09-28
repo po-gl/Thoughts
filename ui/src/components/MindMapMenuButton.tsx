@@ -57,7 +57,7 @@ function MindMapMenuButton({ mindMap, onPress, setShouldRefreshMaps }: Props) {
     <>
       <button className="menu-button mindmap-button" onClick={onPress} >
         <div className="menu-text" >
-          {`${mindMap.title} ${mindMap._id.toString().slice(-10)}`}
+          {mindMap.title}
         </div>
         <div className="inner-buttons">
           <button className="inner-button" onClick={onRename}>
