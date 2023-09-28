@@ -17,7 +17,7 @@ type Props = {
 }
 function MindMapMenuButton({ mindMap, onPress, setShouldRefreshMaps }: Props) {
   const reactFlowInstance = useReactFlow();
-  const [, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const [showRenameModal, setShowRenameModal] = useState(false);
   const renameInput = useRef<HTMLInputElement>(null);
@@ -53,9 +53,11 @@ function MindMapMenuButton({ mindMap, onPress, setShouldRefreshMaps }: Props) {
     }
   }, [mindMap._id, reactFlowInstance, setShouldRefreshMaps, setSearchParams]);
 
+  const isSelected = searchParams.get('map') === mindMap._id.toString();
+
   return (
     <>
-      <button className="menu-button mindmap-button" onClick={onPress} >
+      <button className={`menu-button mindmap-button ${isSelected ? 'selected' : ''}`} onClick={onPress} >
         <div className="menu-text" >
           {mindMap.title}
         </div>
