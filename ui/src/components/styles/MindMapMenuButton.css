@@ -10,6 +10,7 @@
   display: inline;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin-inline-end: 1em;
 }
 
 .inner-buttons {
