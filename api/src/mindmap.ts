@@ -48,7 +48,8 @@ async function update(id: string, mindmap: MindMap) {
   const db = getDB();
   validate(mindmap);
   const objectId = new ObjectId(id);
-  await db.collection('maps').updateOne({ _id: objectId }, { $set: mindmap });
+  const { _id: _, ...mindmapWithoutId } = mindmap;
+  await db.collection('maps').updateOne({ _id: objectId }, { $set: mindmapWithoutId });
   const savedMindmap = await db.collection('maps').findOne({ _id: objectId });
   return savedMindmap;
 }
