@@ -1,6 +1,7 @@
 .react-flow__panel.add-nodes-menu-panel {
   padding: 4px;
   box-shadow: 5px 5px 0 var(--theme-color);
+  min-width: 17em;
 }
 
 .add-nodes-menu-panel ul {
