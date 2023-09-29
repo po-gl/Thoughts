@@ -6,16 +6,35 @@
   background-color: color-mix(in srgb, var(--theme-3rd-color) 70%, var(--panel-color));
 }
 
-.menu-button.mindmap-button .menu-text {
+.menu-button.mindmap-button .menu-text.hideOverflow {
   display: inline;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-inline-end: 1em;
 }
 
 .inner-buttons {
   margin-inline-start: auto;
+  opacity: 0;
 }
+
+.inner-buttons.showing {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .menu-button.mindmap-button .menu-text {
+    display: inline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-inline-end: 1em;
+  }
+
+  .inner-buttons {
+    margin-inline-start: auto;
+    opacity: 1;
+  }
+}
+
 
 .inner-buttons .inner-button {
   border: 1px solid var(--primary-color);

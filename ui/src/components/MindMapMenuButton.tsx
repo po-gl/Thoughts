@@ -19,6 +19,8 @@ function MindMapMenuButton({ mindMap, onPress, setShouldRefreshMaps }: Props) {
   const reactFlowInstance = useReactFlow();
   const [searchParams, setSearchParams] = useSearchParams();
 
+  const [showInnerButtons, setShowInnerButtons] = useState(false);
+
   const [showRenameModal, setShowRenameModal] = useState(false);
   const renameInput = useRef<HTMLInputElement>(null);
 
@@ -57,11 +59,16 @@ function MindMapMenuButton({ mindMap, onPress, setShouldRefreshMaps }: Props) {
 
   return (
     <>
-      <button className={`menu-button mindmap-button ${isSelected ? 'selected' : ''}`} onClick={onPress} >
-        <div className="menu-text" >
+      <button
+        className={`menu-button mindmap-button ${isSelected ? 'selected' : ''}`}
+        onClick={onPress}
+        onMouseEnter={() => setShowInnerButtons(true)}
+        onMouseLeave={() => setShowInnerButtons(false)}
+      >
+        <div className={`menu-text ${showInnerButtons ? 'hideOverflow' : ''}`} >
           {mindMap.title}
         </div>
-        <div className="inner-buttons">
+        <div className={`inner-buttons ${showInnerButtons ? 'showing' : ''}`}>
           <button className="inner-button" onClick={onRename}>
             <FontAwesomeIcon icon={faPenToSquare} />
           </button>
