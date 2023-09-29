@@ -18,13 +18,30 @@
 }
 
 .inner-buttons .inner-button {
-  border: 1px solid var(--secondary-color);
-  filter: drop-shadow(2px 2px 0px var(--theme-2nd-color));
+  border: 1px solid var(--primary-color);
   padding: 0.6em;
   margin-inline-start: 0.2em;
   width: 2.4em;
   height: 2.4em;
   font-size: 0.8em;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.inner-buttons .inner-button::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: var(--theme-2nd-color);
+  width: calc(100% + 1px);
+  height: calc(100% + 1px);
+  border-radius: calc(var(--radius) - 1px);
+  -webkit-transform: translate3d(2px, 2px, -1px);
+  transform: translate3d(2px, 2px, -1px);
 }
 
 .inner-buttons .inner-button:hover {

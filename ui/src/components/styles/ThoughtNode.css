@@ -15,15 +15,31 @@
 }
 
 .thought-node {
+  --node-radius: 30px;
   min-height: 1em;
   padding: 5px;
-  border-radius: 30px;
-  /* border: 2px solid var(--theme-color); */
-  box-shadow: 2px 2px 0 var(--node-color);
+  border-radius: var(--node-radius);
   border: 1px solid var(--primary-color);
   background: var(--panel-color);
-
   font: 1.2em sans-serif;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.thought-node::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: var(--node-color);
+  width: calc(100% + 1px);
+  height: calc(100% + 1px);
+  border-radius: calc(var(--node-radius) - 1px);
+  -webkit-transform: translate3d(3px, 3px, -1px);
+  transform: translate3d(3px, 3px, -1px);
 }
 
 .thought-node .react-flow__handle {
