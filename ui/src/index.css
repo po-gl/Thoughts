@@ -54,6 +54,7 @@ body {
   width: 100vw;
   height: 100vh;
   position: relative;
+  overflow: hidden;
 }
 
 #root {
@@ -65,7 +66,6 @@ body {
   color: var(--primary-color);
   background-color: var(--theme-2nd-color);
 }
-
 
 .react-flow__panel {
   border-radius: var(--radius);
@@ -229,5 +229,25 @@ input[type="checkbox"]:checked::before {
 
   100% {
     opacity: 1;
+  }
+}
+
+@media (max-width: 540px) {
+  .react-flow__panel {
+    font-size: 0.8em;
+  }
+
+  .toast {
+    font-size: 0.9em;
+    padding-inline: 0.5em;
+    padding-block: 0.2em;
+  }
+
+  button:hover {
+    background-color: transparent;
+  }
+
+  button.activated:hover {
+    background-color: color-mix(in srgb, var(--theme-color) 40%, white 60%);
   }
 }

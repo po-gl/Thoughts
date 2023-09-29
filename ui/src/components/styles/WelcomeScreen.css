@@ -64,6 +64,26 @@
   opacity: 0.8;
 }
 
+@media (max-width: 540px) {
+  .welcome-screen .center {
+    min-width: 250px;
+    top: 50%;
+  }
+
+  .welcome-screen h1 {
+    font-size: 2.5em;
+  }
+
+  .welcome-screen p {
+    font-size: 1em;
+  }
+
+  .welcome-screen .controls-panel-hint {
+    font-size: 0.75em;
+    transform: translateX(-5em);
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   .welcome-screen h1 {
     color: white;

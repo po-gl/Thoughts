@@ -1,9 +1,10 @@
 import { IconDefinition, faArrowPointer, faHand, faLock, faRotateLeft, faRotateRight, faUnlock, faWind } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useMediaQuery } from 'react-responsive';
 import { Panel } from 'reactflow';
+import { ToolMode } from '../App';
 import AddNodesMenu from './AddNodesMenu';
 import './styles/ControlsPanel.css';
-import { ToolMode } from '../App';
 
 
 type ToolButtonProps = {
@@ -50,11 +51,16 @@ type ControlPanelProps = {
   setShouldUpdateLayout: React.Dispatch<React.SetStateAction<boolean>>,
 }
 function ControlsPanel({ toolMode, setToolMode, isLocked, toggleLock, undo, redo, canUndo, canRedo, setShouldUpdateLayout }: ControlPanelProps) {
+
+  const isMobile = useMediaQuery({ query: '(min-width: 540px)' })
+
   return (
     <Panel position="top-center" className="controls-panel">
 
       <ToolButton id="first" toolMode={'panning'} icon={faHand} currentToolMode={toolMode} setToolMode={setToolMode} />
-      <ToolButton toolMode={'selecting'} icon={faArrowPointer} currentToolMode={toolMode} setToolMode={setToolMode} />
+      {isMobile &&
+        <ToolButton toolMode={'selecting'} icon={faArrowPointer} currentToolMode={toolMode} setToolMode={setToolMode} />
+      }
       <AddNodesMenu setShouldUpdateLayout={setShouldUpdateLayout} />
 
       {/* <span className="divider" />

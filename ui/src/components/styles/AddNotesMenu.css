@@ -175,3 +175,18 @@
     --rotation: 170deg;
   }
 }
+
+@media (max-width: 540px) {
+  .add-nodes-menu-panel input[type="text"] {
+    font-size: 1.0em;
+  }
+
+  .add-nodes-menu-panel .checkbox-and-label label,
+  .add-nodes-menu-panel .slider-and-label label {
+    font-size: 1.1em;
+  }
+
+  .add-nodes-menu-panel button {
+    font-size: 1.1em;
+  }
+}

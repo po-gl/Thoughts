@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react';
+import Div100vh from 'react-div-100vh';
 import { Toaster } from 'react-hot-toast';
 import ReactFlow, { Background, Connection, Edge, EdgeChange, Node, NodeChange, ReactFlowProvider, SelectionMode, addEdge, applyEdgeChanges } from 'reactflow';
 import 'reactflow/dist/style.css';
@@ -14,8 +15,8 @@ import ProgressContext from './context/ProgressContext.ts';
 import SelectedNodeContext from './context/SelectedNodeContext.ts';
 import useHistory from './hooks/useHistory.tsx';
 import useLayoutElements from './hooks/useLayoutElements.tsx';
-import applyNodeChangesWithTypes from './utils/applyNodeChangesWithTypes.ts';
 import useMapsRoutes from './hooks/useMapsRoutes.tsx';
+import applyNodeChangesWithTypes from './utils/applyNodeChangesWithTypes.ts';
 
 
 const initialNodes: Node<ThoughtData, WidgetType>[] = [];
@@ -80,6 +81,7 @@ function App() {
             <ReactFlow
               fitView={true}
               fitViewOptions={{ padding: 0.3 }}
+              minZoom={0.1}
               nodes={nodes}
               edges={edges}
               onNodesChange={onNodesChange}
@@ -140,7 +142,9 @@ function App() {
 export default function WrappedApp() {
   return (
     <ReactFlowProvider>
-      <App />
+      <Div100vh>
+        <App />
+      </Div100vh>
     </ReactFlowProvider>
   )
 }

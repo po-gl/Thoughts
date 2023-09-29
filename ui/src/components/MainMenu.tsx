@@ -102,7 +102,7 @@ function MainMenu() {
         <Panel
           position="top-left"
           className="main-menu-panel"
-          style={{ top: '2.8em' }}
+          style={{ top: '2.9em' }}
         >
           <div className="mindmap-list">
             <MindMapList
