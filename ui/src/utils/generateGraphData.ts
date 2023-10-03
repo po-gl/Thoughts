@@ -1,5 +1,5 @@
-import { Node, Edge } from "reactflow";
-import { ThoughtData, WidgetType } from "../components/ThoughtNode.tsx";
+import { Node, Edge } from 'reactflow';
+import { ThoughtData, WidgetType } from '../components/ThoughtNode.tsx';
 
 export default function generateGraphData() {
   const nodes: Node<ThoughtData, WidgetType>[] = [];
@@ -14,7 +14,7 @@ export default function generateGraphData() {
       position: { x: 300 * Math.cos(rand * 100), y: 300 * Math.sin(rand * 100) },
       data: {
         text: `${thoughts[Math.floor(rand * thoughts.length)]} ${i}`,
-      }
+      },
     });
   }
   for (let i = 0; i < 8; i++) {

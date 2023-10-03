@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import './styles/ProgressIndicator.css'
-import ProgressContext from '../context/ProgressContext';
+import './styles/ProgressIndicator.css';
+import ProgressContext from '../context/ProgressContext.ts';
 
 function ProgressIndicator() {
 

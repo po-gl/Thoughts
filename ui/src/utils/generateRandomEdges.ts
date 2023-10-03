@@ -1,5 +1,5 @@
-import { Node, Edge } from "reactflow";
-import { ThoughtData, WidgetType } from "../components/ThoughtNode.tsx";
+import { Node, Edge } from 'reactflow';
+import { ThoughtData, WidgetType } from '../components/ThoughtNode.tsx';
 
 export default function generateRandomEdges(nodes: Node<ThoughtData, WidgetType>[]) {
   const edges: Edge[] = [];

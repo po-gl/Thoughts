@@ -1,9 +1,9 @@
-import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { Handle, Node, Position, useReactFlow } from 'reactflow';
 import './styles/ThoughtNode.css';
 import stars from '../assets/stars.svg';
-import HistoryContext from "../context/HistoryContext";
-import SelectedNodeContext from "../context/SelectedNodeContext";
+import HistoryContext from '../context/HistoryContext.ts';
+import SelectedNodeContext from '../context/SelectedNodeContext.ts';
 
 export type WidgetType = 'thought';
 
@@ -25,7 +25,7 @@ function ThoughtNode({ id, data, isConnectable }: Props) {
   const [focused, setFocused] = useState(false);
 
   const [debounceDelayId, setDebounceDelayId] = useState<number>();
-  const debounce_delay_ms = 3000;
+  const DEBOUNCE_DELAY_MS = 3000;
 
   const growTextArea = useRef<HTMLTextAreaElement | null>(null);
 
@@ -44,7 +44,7 @@ function ThoughtNode({ id, data, isConnectable }: Props) {
         node.data = { ...node.data, text: event.target.value };
       }
       updateHistory({ nodes: getNodes() as Node<ThoughtData, WidgetType>[], edges: getEdges() });
-    }, debounce_delay_ms);
+    }, DEBOUNCE_DELAY_MS);
 
     setDebounceDelayId(cancelable);
   }, [debounceDelayId, getEdges, getNode, getNodes, id, updateHistory]);
@@ -58,7 +58,7 @@ function ThoughtNode({ id, data, isConnectable }: Props) {
   }, [growTextArea]);
 
   useEffect(() => {
-    grow()
+    grow();
   }, [data, grow]);
 
   return (
@@ -79,8 +79,8 @@ function ThoughtNode({ id, data, isConnectable }: Props) {
             onInput={grow}
             onChange={onChange}
 
-            className={focused ? "nodrag" : ""}
-            style={{ cursor: focused ? "default" : "pointer" }}
+            className={focused ? 'nodrag' : ''}
+            style={{ cursor: focused ? 'default' : 'pointer' }}
             onBlur={() => setFocused(false)}
           />
         </div>

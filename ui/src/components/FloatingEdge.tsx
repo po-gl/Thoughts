@@ -1,7 +1,7 @@
-import { useCallback, useContext } from "react";
-import { BaseEdge, EdgeLabelRenderer, EdgeProps, getBezierPath, getStraightPath, useStore } from "reactflow";
-import getEdgeParams from "../utils/getEdgeParams";
-import SelectedNodeContext from "../context/SelectedNodeContext";
+import { useCallback, useContext } from 'react';
+import { BaseEdge, EdgeLabelRenderer, EdgeProps, getBezierPath, getStraightPath, useStore } from 'reactflow';
+import getEdgeParams from '../utils/getEdgeParams.ts';
+import SelectedNodeContext from '../context/SelectedNodeContext.ts';
 import './styles/FloatingEdge.css';
 
 const EDGE_TYPE: 'bezier' | 'straight' = 'straight';

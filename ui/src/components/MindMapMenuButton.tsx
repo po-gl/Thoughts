@@ -4,7 +4,7 @@ import { useCallback, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useSearchParams } from 'react-router-dom';
 import { useReactFlow } from 'reactflow';
-import { apiFetch } from '../utils/api';
+import { apiFetch } from '../utils/api.ts';
 import { MindMap } from './MindMapList';
 import Modal from './Modal';
 import './styles/MenuButton.css';
@@ -14,7 +14,7 @@ type Props = {
   mindMap: MindMap;
   onPress: () => void;
   setShouldRefreshMaps: React.Dispatch<React.SetStateAction<boolean>>;
-}
+};
 function MindMapMenuButton({ mindMap, onPress, setShouldRefreshMaps }: Props) {
   const reactFlowInstance = useReactFlow();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -33,7 +33,7 @@ function MindMapMenuButton({ mindMap, onPress, setShouldRefreshMaps }: Props) {
     const id = mindMap._id.toString();
     const response = await apiFetch(`/maps/${id}`, 'PUT', { mindmap: { ...mindMap, title } });
     if (response.status === 200) {
-      toast.success('Map renamed.')
+      toast.success('Map renamed.');
       setShouldRefreshMaps(true);
     } else {
       toast.error('There was an error updating the map.');
@@ -81,14 +81,14 @@ function MindMapMenuButton({ mindMap, onPress, setShouldRefreshMaps }: Props) {
       <Modal
         showing={showRenameModal}
         onDismiss={() => {
-          setShowRenameModal(false)
+          setShowRenameModal(false);
         }}
         actionName='Rename'
         onSubmit={() => {
           if (renameInput.current !== null) {
-            renameMindMap(renameInput.current.value)
+            renameMindMap(renameInput.current.value);
           }
-          setShowRenameModal(false)
+          setShowRenameModal(false);
         }}
       >
         <h2>Rename map</h2>

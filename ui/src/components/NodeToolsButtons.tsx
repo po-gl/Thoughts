@@ -1,4 +1,4 @@
-import './styles/NodeToolsButtons.css'
+import './styles/NodeToolsButtons.css';
 
 function ToolButtons() {
 

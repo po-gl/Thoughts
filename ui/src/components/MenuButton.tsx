@@ -1,4 +1,4 @@
-import './styles/MenuButton.css'
+import './styles/MenuButton.css';
 
 type Props = {
   text: string;
@@ -6,7 +6,7 @@ type Props = {
   link?: string;
   shortcut?: string;
   icon?: JSX.Element;
-}
+};
 function MenuButton({ text, link = '', onPress = () => { }, shortcut = '', icon }: Props) {
   if (link !== '') {
     return (

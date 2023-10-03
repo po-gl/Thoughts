@@ -1,11 +1,11 @@
-import { Node, Edge } from "reactflow";
-import { ThoughtData, WidgetType } from "../components/ThoughtNode.tsx";
+import { Node, Edge } from 'reactflow';
+import { ThoughtData, WidgetType } from '../components/ThoughtNode.tsx';
 
 
 type SimplifiedGraph = {
   nodes: { id: string, thought: string }[]
   edges: { justification: string, source_id: string, target_id: string }[]
-}
+};
 
 export function convertSimplifiedGraph(graph: SimplifiedGraph) {
   const nodes: Node<ThoughtData, WidgetType>[] = [];
@@ -19,16 +19,16 @@ export function convertSimplifiedGraph(graph: SimplifiedGraph) {
       position: { x: Math.random() * spread, y: Math.random() * spread },
       data: {
         text: thought,
-      }
+      },
     });
   }
 
-  for (const { justification, source_id, target_id } of graph.edges) {
+  for (const { justification, source_id: sourceId, target_id: targetId } of graph.edges) {
     edges.push({
-      id: `${source_id}-${target_id}`,
+      id: `${sourceId}-${targetId}`,
       type: 'floating',
-      source: source_id,
-      target: target_id,
+      source: sourceId,
+      target: targetId,
       data: {
         justification,
       },
@@ -49,7 +49,7 @@ export function stringsToNodes(strings: string[]) {
       position: { x: Math.random() * spread, y: Math.random() * spread },
       data: {
         text: strings[i],
-      }
+      },
     });
   }
   return nodes;

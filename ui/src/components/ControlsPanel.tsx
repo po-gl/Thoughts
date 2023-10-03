@@ -13,7 +13,7 @@ type ToolButtonProps = {
   icon: IconDefinition
   currentToolMode: ToolMode
   setToolMode: React.Dispatch<React.SetStateAction<ToolMode>>;
-}
+};
 function ToolButton({ id = '', toolMode, icon, currentToolMode, setToolMode }: ToolButtonProps) {
   return (
     <button
@@ -30,7 +30,7 @@ type LockButtonProps = {
   id: string;
   isLocked: boolean;
   toggleLock: () => void;
-}
+};
 function LockButton({ id, isLocked, toggleLock }: LockButtonProps) {
   return (
     <button id={id} className={isLocked ? 'activated' : ''} onClick={toggleLock} >
@@ -49,10 +49,10 @@ type ControlPanelProps = {
   canUndo: boolean,
   canRedo: boolean,
   setShouldUpdateLayout: React.Dispatch<React.SetStateAction<boolean>>,
-}
+};
 function ControlsPanel({ toolMode, setToolMode, isLocked, toggleLock, undo, redo, canUndo, canRedo, setShouldUpdateLayout }: ControlPanelProps) {
 
-  const isMobile = useMediaQuery({ query: '(min-width: 540px)' })
+  const isMobile = useMediaQuery({ query: '(min-width: 540px)' });
 
   return (
     <Panel position="top-center" className="controls-panel">

@@ -1,23 +1,25 @@
-import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-import { useSearchParams } from "react-router-dom";
-import { Edge, Node, ReactFlowJsonObject, useReactFlow } from "reactflow";
-import { MindMap } from "../components/MindMapList";
-import { ThoughtData, WidgetType } from "../components/ThoughtNode";
-import { apiFetch } from "../utils/api";
-import { HistoryState } from "./useHistory";
+import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
+import { useSearchParams } from 'react-router-dom';
+import { Edge, Node, ReactFlowJsonObject, useReactFlow } from 'reactflow';
+import { MindMap } from '../components/MindMapList';
+import { ThoughtData, WidgetType } from '../components/ThoughtNode';
+import { apiFetch } from '../utils/api.ts';
+import { HistoryState } from './useHistory';
 
 type Props = {
   resetHistory: ({ nodes, edges }: HistoryState) => void
-}
+};
 function useMapsRoutes({ resetHistory }: Props) {
   const reactFlowInstance = useReactFlow();
   const [shouldFitView, setShouldFitView] = useState(false);
-  const [searchParams,] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
     const mapId = searchParams.get('map');
     let mindMap: MindMap | undefined;
+
+    let ignore = false;
     const fetchMap = async () => {
       const response = await apiFetch(`/maps/${mapId}`, 'GET');
       if (!ignore) {
@@ -27,7 +29,8 @@ function useMapsRoutes({ resetHistory }: Props) {
           mindMap = result;
         }
       }
-    }
+    };
+
     fetchMap().then(() => {
       if (!ignore) {
         if (mindMap !== undefined) {
@@ -39,16 +42,15 @@ function useMapsRoutes({ resetHistory }: Props) {
           setShouldFitView(true);
           resetHistory({ nodes: nodes as Node<ThoughtData, WidgetType>[], edges: edges as Edge[] });
         } else if (mapId) {
-          toast.error("Map not found.");
+          toast.error('Map not found.');
         }
       }
     });
 
-    let ignore = false;
     return () => {
       ignore = true;
-    }
-  }, [searchParams, reactFlowInstance, resetHistory])
+    };
+  }, [searchParams, reactFlowInstance, resetHistory]);
 
   useEffect(() => {
     if (shouldFitView) {

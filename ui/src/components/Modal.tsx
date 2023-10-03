@@ -5,7 +5,7 @@ type Props = {
   onDismiss: () => void
   actionName?: string
   onSubmit?: () => void
-}
+};
 function Modal({ showing, onDismiss, actionName, onSubmit, children }: React.PropsWithChildren<Props>) {
 
   if (!showing) return null;

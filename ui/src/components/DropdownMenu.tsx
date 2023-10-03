@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 import './styles/DropdownMenu.css';
 
 type Props = {
@@ -6,7 +6,7 @@ type Props = {
   showing: boolean,
   // TODO dismiss when starting to drag ReactFlow, use context/provider
   // dismiss: () => void
-}
+};
 function DropdownMenu({ children, showing }: Props) {
 
   return showing ? (

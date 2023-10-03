@@ -14,7 +14,7 @@ import './styles/AddNotesMenu.css';
 
 type AddNodesMenuProps = {
   setShouldUpdateLayout: React.Dispatch<React.SetStateAction<boolean>>,
-}
+};
 function AddNodesMenu({ setShouldUpdateLayout }: AddNodesMenuProps) {
   const { setNodes, setEdges } = useReactFlow();
   const { updateHistory } = useContext(HistoryContext);
@@ -22,14 +22,14 @@ function AddNodesMenu({ setShouldUpdateLayout }: AddNodesMenuProps) {
   const [showing, setIsShowing] = useState(false);
   const [generateWithGPT, setGenerateWithGPT] = useState(true);
   const [mapSize, setMapSize] = useState(6);
-  const [nodesToAdd, setNodesToAdd] = useState<string[]>(["Fruits", "Fries", "Lies", "And butterflies", ""]);
+  const [nodesToAdd, setNodesToAdd] = useState<string[]>(['Fruits', 'Fries', 'Lies', 'And butterflies', '']);
 
   const handleInput = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const index = parseInt(e.target.getAttribute('id') ?? "-1");
+    const index = parseInt(e.target.getAttribute('id') ?? '-1');
     setNodesToAdd(prev => {
       return prev
         .map((str, i) => i === index ? e.target.value : str)
-        .concat(index === nodesToAdd.length - 1 ? "" : []);
+        .concat(index === nodesToAdd.length - 1 ? '' : []);
     });
   }, [nodesToAdd.length]);
 
@@ -50,7 +50,7 @@ function AddNodesMenu({ setShouldUpdateLayout }: AddNodesMenuProps) {
   }, [mapSize]);
 
   const addNodes = useCallback(async () => {
-    const filteredNodesToAdd = nodesToAdd.filter(str => str !== "");
+    const filteredNodesToAdd = nodesToAdd.filter(str => str !== '');
     if (filteredNodesToAdd.length === 0) return;
     setIsShowing(false);
 
@@ -84,7 +84,7 @@ function AddNodesMenu({ setShouldUpdateLayout }: AddNodesMenuProps) {
     <div className="add-nodes-menu">
       <button
         onClick={() => setIsShowing(prev => !prev)}
-        className={showing ? "activated" : ""}
+        className={showing ? 'activated' : ''}
       >
         <FontAwesomeIcon icon={faFeatherPointed} />
       </button>
@@ -117,7 +117,7 @@ function AddNodesMenu({ setShouldUpdateLayout }: AddNodesMenuProps) {
             </div>
           </span>
           <span className='add-nodes-button-span'>
-            <button onClick={() => setNodesToAdd([""])}>Clear</button>
+            <button onClick={() => setNodesToAdd([''])}>Clear</button>
             <button onClick={addNodes} className={generateWithGPT ? 'with-gradient' : ''}>Add thoughts</button>
           </span>
         </Panel>

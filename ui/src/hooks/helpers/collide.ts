@@ -7,7 +7,7 @@ export function collide() {
     const tree = quadtree(
       nodes,
       (d) => d.x ?? 0,
-      (d) => d.y ?? 0
+      (d) => d.y ?? 0,
     );
 
     for (const node of nodes) {
@@ -31,6 +31,7 @@ export function collide() {
             quad.data.x = quad.data.x ?? 0;
             quad.data.y = quad.data.y ?? 0;
 
+            // eslint-disable-next-line @typescript-eslint/no-shadow
             const r = node.width / 2 + quad.data.width / 2;
             let x = node.x - quad.data.x;
             let y = node.y - quad.data.y;

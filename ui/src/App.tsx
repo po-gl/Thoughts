@@ -51,18 +51,18 @@ function App() {
   const onNodesChange = useCallback(
     (changes: NodeChange[]) => {
       setShowWelcome(false);
-      setNodes((nds) => applyNodeChangesWithTypes(changes, nds))
+      setNodes((nds) => applyNodeChangesWithTypes(changes, nds));
     }
-    , []
+    , [],
   );
   const onEdgesChange = useCallback(
     (changes: EdgeChange[]) => setEdges((eds) => applyEdgeChanges(changes, eds))
-    , []
+    , [],
   );
 
   const onConnect = useCallback(
     (params: Edge | Connection) => setEdges((eds) => addEdge({ ...params, type: 'floating' }, eds))
-    , []
+    , [],
   );
 
   const toggleLock = useCallback(() => {
@@ -128,11 +128,11 @@ function App() {
           error: {
             className: 'toast toast-error',
             duration: 5000,
-            icon: '❌'
+            icon: '❌',
           },
           success: {
             className: 'toast toast-success',
-          }
+          },
         }}
       />
     </div>
@@ -146,5 +146,5 @@ export default function WrappedApp() {
         <App />
       </Div100vh>
     </ReactFlowProvider>
-  )
+  );
 }

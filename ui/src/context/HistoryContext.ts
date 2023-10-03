@@ -1,5 +1,5 @@
-import { createContext } from "react";
-import { HistoryState } from "../hooks/useHistory";
+import { createContext } from 'react';
+import { HistoryState } from '../hooks/useHistory';
 
 type HistoryContextProps = {
   undo: () => void;
@@ -8,7 +8,7 @@ type HistoryContextProps = {
   canRedo: boolean;
   updateHistory: (history: HistoryState) => void;
   resetHistory: (history: HistoryState) => void;
-}
+};
 
 const HistoryContext = createContext<HistoryContextProps>({
   undo: () => { },
@@ -16,7 +16,7 @@ const HistoryContext = createContext<HistoryContextProps>({
   canUndo: false,
   canRedo: false,
   updateHistory: () => { },
-  resetHistory: () => { }
+  resetHistory: () => { },
 });
 
 export default HistoryContext;

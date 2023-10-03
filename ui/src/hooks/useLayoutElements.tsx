@@ -4,8 +4,8 @@ import { ThoughtData, WidgetType } from '../components/ThoughtNode';
 import collide from './helpers/collide.ts';
 import { useMemo } from 'react';
 
-const simulation_duration_ms = 4000;
-const view_fit_padding = 0.1;
+const SIMULATION_DURATION_MS = 4000;
+const VIEW_FIT_PADDING = 0.1;
 
 export type SimNode = Node<ThoughtData, WidgetType> & SimulationNodeDatum;
 
@@ -22,11 +22,11 @@ type Props = {
   shouldUpdateLayout: boolean
   setShouldUpdateLayout: React.Dispatch<React.SetStateAction<boolean>>
   updateMemo: () => void
-}
+};
 function useLayoutElements({ shouldUpdateLayout, setShouldUpdateLayout, updateMemo }: Props): [boolean, { startForceSim: () => void }] {
   const { getNodes, setNodes, getEdges, fitView } = useReactFlow();
   const initialized = useStore((store) =>
-    [...store.nodeInternals.values()].every((node) => node.width && node.height)
+    [...store.nodeInternals.values()].every((node) => node.width && node.height),
   );
   const cancellableTimeouts: NodeJS.Timeout[] = [];
 
@@ -49,10 +49,10 @@ function useLayoutElements({ shouldUpdateLayout, setShouldUpdateLayout, updateMe
           return '';
         })
         .strength(0.05)
-        .distance(100)
+        .distance(100),
     );
 
-    let shouldFitView = true
+    let shouldFitView = true;
 
     // The tick function is called every animation frame while the simulation is
     // running and progresses the simulation one step forward each time.
@@ -81,7 +81,7 @@ function useLayoutElements({ shouldUpdateLayout, setShouldUpdateLayout, updateMe
         // Give React and React Flow a chance to update and render the new node
         // positions before we fit the viewport to the new layout.
         if (shouldFitView) {
-          fitView({ padding: view_fit_padding });
+          fitView({ padding: VIEW_FIT_PADDING });
         }
 
         // If the simulation hasn't be stopped, schedule another tick.
@@ -97,14 +97,14 @@ function useLayoutElements({ shouldUpdateLayout, setShouldUpdateLayout, updateMe
 
       cancellableTimeouts.push(setTimeout(() => {
         running = false;
-      }, simulation_duration_ms));
+      }, SIMULATION_DURATION_MS));
     };
 
     if (shouldUpdateLayout) {
       startForceSim();
       cancellableTimeouts.push(setTimeout(() => {
         setShouldUpdateLayout(false);
-      }, simulation_duration_ms + 1));
+      }, SIMULATION_DURATION_MS + 1));
     }
 
     return [true, { startForceSim }];

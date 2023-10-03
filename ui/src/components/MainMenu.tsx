@@ -1,16 +1,16 @@
-import { useCallback, useContext, useEffect, useState } from "react";
-import { Panel, useReactFlow } from "reactflow";
-import { faBarsStaggered, faSave, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useCallback, useContext, useEffect, useState } from 'react';
+import { Panel, useReactFlow } from 'reactflow';
+import { faBarsStaggered, faSave, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './styles/MainMenu.css';
-import DropdownMenu from "./DropdownMenu.tsx";
-import MenuButton from "./MenuButton.tsx";
-import HistoryContext from "../context/HistoryContext.ts";
-import { apiFetch } from "../utils/api.ts";
-import toast from "react-hot-toast";
-import MindMapList, { MindMap } from "./MindMapList.tsx";
-import { useSearchParams } from "react-router-dom";
+import DropdownMenu from './DropdownMenu.tsx';
+import MenuButton from './MenuButton.tsx';
+import HistoryContext from '../context/HistoryContext.ts';
+import { apiFetch } from '../utils/api.ts';
+import toast from 'react-hot-toast';
+import MindMapList, { MindMap } from './MindMapList.tsx';
+import { useSearchParams } from 'react-router-dom';
 
 function MainMenuButton({ onPress }: { onPress: () => void }) {
   return (
@@ -24,7 +24,7 @@ function MainMenuButton({ onPress }: { onPress: () => void }) {
 
 type Props = {
   setShouldRefreshMaps: React.Dispatch<React.SetStateAction<boolean>>;
-}
+};
 function SaveMapButton({ setShouldRefreshMaps }: Props) {
   const reactFlowInstance = useReactFlow();
   const [, setSearchParams] = useSearchParams();
@@ -32,8 +32,8 @@ function SaveMapButton({ setShouldRefreshMaps }: Props) {
   const saveMap = useCallback(async () => {
     const mindmap = {
       user: 'tester',
-      graph: JSON.stringify(reactFlowInstance.toObject())
-    }
+      graph: JSON.stringify(reactFlowInstance.toObject()),
+    };
     const response = await apiFetch('/maps', 'POST', { mindmap });
     const body = await response.text();
     const result = JSON.parse(body);
@@ -44,14 +44,14 @@ function SaveMapButton({ setShouldRefreshMaps }: Props) {
       setSearchParams({ map: id });
       setShouldRefreshMaps(true);
     } else {
-      toast.error("There was an error saving the map.");
+      toast.error('There was an error saving the map.');
     }
 
   }, [reactFlowInstance, setShouldRefreshMaps, setSearchParams]);
 
   return (
     <MenuButton text="Save as new map" onPress={saveMap} icon={<FontAwesomeIcon icon={faSave} />} />
-  )
+  );
 }
 
 function ClearMapButton() {
@@ -75,6 +75,8 @@ function MainMenu() {
   const [shouldRefreshMaps, setShouldRefreshMaps] = useState(false);
 
   useEffect(() => {
+    let ignore = false;
+
     const fetchData = async () => {
       const response = await apiFetch('/maps', 'GET');
       if (!ignore) {
@@ -84,14 +86,13 @@ function MainMenu() {
           setSavedMaps(result);
         }
       }
-    }
+    };
 
-    let ignore = false;
     fetchData();
     setShouldRefreshMaps(false);
     return () => {
       ignore = true;
-    }
+    };
   }, [shouldRefreshMaps]);
 
   return (

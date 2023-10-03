@@ -1,14 +1,14 @@
-import toast from "react-hot-toast";
-import { convertSimplifiedGraph } from "./conversions";
-import { JSONParseError, ResponseError } from "./errors";
+import toast from 'react-hot-toast';
+import { convertSimplifiedGraph } from './conversions.ts';
+import { JSONParseError, ResponseError } from './errors.ts';
 
-const api_endpoint = import.meta.env.VITE_API_ENDPOINT || 'http://localhost:3000/api';
+const API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT || 'http://localhost:3000/api';
 
 async function apiFetch(endpoint: string, method: string, data?: object) {
-  const response = await fetch(`${api_endpoint}${endpoint}`, {
+  const response = await fetch(`${API_ENDPOINT}${endpoint}`, {
     method: method,
     body: JSON.stringify(data),
-    headers: data ? { 'Content-Type': 'application/json', } : {},
+    headers: data ? { 'Content-Type': 'application/json' } : {},
   });
   return response;
 }
@@ -28,7 +28,7 @@ async function fetchGeneratedGraph(thoughts: string[], mapSize: number) {
         node.data = { ...node.data, isGenerated: true };
       }
       return node;
-    })
+    });
 
     return { nodes: updatedNodes, edges };
 

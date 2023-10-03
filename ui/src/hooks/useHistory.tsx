@@ -5,14 +5,14 @@ import { ThoughtData, WidgetType } from '../components/ThoughtNode.tsx';
 export type HistoryState = {
   nodes: Node<ThoughtData, WidgetType>[]
   edges: Edge[]
-}
+};
 
 type Props = {
   initialNodes: Node<ThoughtData, WidgetType>[]
   initialEdges: Edge[]
   setNodes: React.Dispatch<React.SetStateAction<Node<ThoughtData, WidgetType>[]>>
   setEdges: React.Dispatch<React.SetStateAction<Edge[]>>
-}
+};
 function useHistory({ initialNodes, initialEdges, setNodes, setEdges }: Props) {
   const [currHistoryIndex, setHistoryIndex] = useState(0);
   const [history, setHistory] = useState([{ nodes: initialNodes, edges: initialEdges }] as HistoryState[]);
@@ -54,7 +54,7 @@ function useHistory({ initialNodes, initialEdges, setNodes, setEdges }: Props) {
     setHistory(prev => {
       const newHistoryState: HistoryState = { nodes, edges };
       const newHistory = [...prev.slice(0, currHistoryIndex + 1), newHistoryState];
-      console.log(`Updating history, newHistoryState.nodes.length: ${newHistoryState.nodes.length}`)
+      console.log(`Updating history, newHistoryState.nodes.length: ${newHistoryState.nodes.length}`);
       return newHistory;
     });
     setHistoryIndex(prev => prev + 1);
@@ -63,7 +63,7 @@ function useHistory({ initialNodes, initialEdges, setNodes, setEdges }: Props) {
   const resetHistory = useCallback(({ nodes = [], edges = [] }: HistoryState) => {
     setHistory([{ nodes, edges }]);
     setHistoryIndex(0);
-  }, [])
+  }, []);
 
   const canUndo = currHistoryIndex > 0;
 

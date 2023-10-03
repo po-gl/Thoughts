@@ -1,6 +1,6 @@
-import { ObjectId } from "mongodb";
-import MindMapMenuButton from "./MindMapMenuButton";
-import { useSearchParams } from "react-router-dom";
+import { ObjectId } from 'mongodb';
+import MindMapMenuButton from './MindMapMenuButton';
+import { useSearchParams } from 'react-router-dom';
 
 export type MindMap = {
   _id: ObjectId;
@@ -11,13 +11,13 @@ export type MindMap = {
   title: string;
   description: string;
   graph: string;
-}
+};
 
 type Props = {
   savedMaps: MindMap[]
   setMainMenuIsShowing: React.Dispatch<React.SetStateAction<boolean>>
   setShouldRefreshMaps: React.Dispatch<React.SetStateAction<boolean>>
-}
+};
 function MindMapList({ savedMaps, setMainMenuIsShowing, setShouldRefreshMaps }: Props) {
   const [, setSearchParams] = useSearchParams();
 
@@ -31,7 +31,7 @@ function MindMapList({ savedMaps, setMainMenuIsShowing, setShouldRefreshMaps }: 
         setSearchParams({ map: mindMap._id.toString() });
       }}
     />
-  ))
+  ));
 
   return (
     <>
@@ -40,4 +40,4 @@ function MindMapList({ savedMaps, setMainMenuIsShowing, setShouldRefreshMaps }: 
   );
 }
 
-export default MindMapList
+export default MindMapList;

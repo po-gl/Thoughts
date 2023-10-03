@@ -1,4 +1,4 @@
-import { Node, Position, XYPosition } from "reactflow";
+import { Node, Position, XYPosition } from 'reactflow';
 
 function getNodeIntersection(intersectionNode: Node, targetNode: Node, widthOffset: number): XYPosition {
   const {
