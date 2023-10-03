@@ -3,12 +3,11 @@ import request from 'supertest';
 import { app, start, close } from '../src/server.js';
 import { getDB } from '../src/db.js';
 import { ObjectId } from 'mongodb';
-import { response } from 'express';
 
 
-const isoDateRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/
-function dateReviver(key: string, value: string) {
-  return isoDateRegex.test(value) ? new Date(value) : value
+const isoDateRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/;
+function dateReviver(_key: string, value: string) {
+  return isoDateRegex.test(value) ? new Date(value) : value;
 }
 
 const agent = request.agent(app);
@@ -21,7 +20,7 @@ describe('integration for routes module', () => {
 
   afterAll(async () => {
     await close();
-  })
+  });
 
   test('should return a expected list of endpoints for GET /', async () => {
     const response = await agent.get('/');
@@ -30,15 +29,15 @@ describe('integration for routes module', () => {
     expect(result.endpoints.length).toBeGreaterThan(0);
 
     const expectedEndpoints = [
-      "/maps",
-      "/maps/:id",
-      "/generate-mindmap",
-      "/ml/test",
-    ]
-    const actualEndpoints = result.endpoints.map((e) => e.endpoint)
+      '/maps',
+      '/maps/:id',
+      '/generate-mindmap',
+      '/ml/test',
+    ];
+    const actualEndpoints = result.endpoints.map((e) => e.endpoint);
 
     for (const endpoint of expectedEndpoints) {
-      expect(actualEndpoints).toContain(endpoint)
+      expect(actualEndpoints).toContain(endpoint);
     }
   });
 
@@ -80,7 +79,7 @@ describe('integration for routes module', () => {
       const response = await agent.get('/ml/test');
       const message = response.text;
       expect(message).toBe('This is a test.');
-    })
+    });
 
     test('should get a generated a graph from OpenAI API for POST /generate-mindmap', async () => {
       const response = await agent.post('/generate-mindmap').send({ thoughts: ['test'], mapSize: 2 });

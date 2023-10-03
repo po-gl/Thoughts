@@ -12,7 +12,7 @@ describe('mindmap module', () => {
 
   beforeAll(async () => {
     connection = await MongoClient.connect(global.__MONGO_URI__);
-    db = await connection.db();
+    db = connection.db();
   });
 
   afterAll(async () => {
@@ -29,7 +29,7 @@ describe('mindmap module', () => {
 
     beforeEach(() => {
       exampleMindmap.graph = '';
-    })
+    });
 
     test('should throw for an invalid mindmap', () => {
       exampleMindmap.graph = '{ "nodes": [] "edges": []}'; // Missing comma
@@ -76,7 +76,7 @@ describe('mindmap module', () => {
       const id = exampleMindmap._id.toString();
 
       const updatedMindmap = await mindmap.update(id, { ...exampleMindmap, title: 'Updated title' });
-      const foundMindmap = await db.collection('maps').findOne({ _id: exampleMindmap._id })
+      const foundMindmap = await db.collection('maps').findOne({ _id: exampleMindmap._id });
       expect(foundMindmap).toEqual(updatedMindmap);
     });
 

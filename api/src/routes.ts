@@ -8,17 +8,17 @@ const routes: Router = Router();
 routes.use(cookieParser());
 routes.use(bodyParser.json());
 
-routes.get('/', async (req, res) => {
-  const route_endpoints = routes.stack
+routes.get('/', async (_req, res) => {
+  const routeEndpoints = routes.stack
     .map((layer) => layer.route)
     .filter((route) => route !== undefined)
     .map((route) => {
       return {
         endpoint: route.path,
-        methods: route.methods
-      }
-    })
-  res.json({ endpoints: route_endpoints });
+        methods: route.methods,
+      };
+    });
+  res.json({ endpoints: routeEndpoints });
 });
 
 routes.get('/maps', async (req, res) => {
@@ -49,7 +49,7 @@ routes.get('/maps/:id', async (req, res) => {
     const map = await mindmap.get(req.params.id);
     res.send(map);
   } catch (e) {
-    res.json({ error: `Unable to get map with id: ${req.params.id}` })
+    res.json({ error: `Unable to get map with id: ${req.params.id}` });
   }
 });
 
@@ -60,16 +60,16 @@ routes.put('/maps/:id', async (req, res) => {
     res.send(updatedMap);
   } catch (e) {
     console.error(e);
-    res.status(500).json({ error: `Unable to update map with id: ${req.params.id}` })
+    res.status(500).json({ error: `Unable to update map with id: ${req.params.id}` });
   }
-})
+});
 
 routes.delete('/maps/:id', async (req, res) => {
   try {
     const wasDeleted = await mindmap.delete(req.params.id);
     res.send(wasDeleted);
   } catch (e) {
-    res.status(500).json({ error: `Unable to delete map with id: ${req.params.id}` })
+    res.status(500).json({ error: `Unable to delete map with id: ${req.params.id}` });
   }
 });
 
@@ -85,11 +85,11 @@ routes.post('/generate-mindmap', async (req, res) => {
     const map = await ml.generateMindmap(thoughts, mapSize);
     res.send(map);
   } catch (e) {
-    res.json({ error: 'Generated invalid JSON' })
+    res.json({ error: 'Generated invalid JSON' });
   }
 });
 
-routes.get('/ml/test', async (req, res) => {
+routes.get('/ml/test', async (_req, res) => {
   try {
     const message = await ml.test();
     res.send(message);

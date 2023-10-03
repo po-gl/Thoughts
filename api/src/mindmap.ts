@@ -10,7 +10,7 @@ export type MindMap = {
   title: string;
   description: string;
   graph: string;
-}
+};
 
 async function list(user: string) {
   const db = getDB();
@@ -48,6 +48,7 @@ async function update(id: string, mindmap: MindMap) {
   const db = getDB();
   validate(mindmap);
   const objectId = new ObjectId(id);
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   const { _id: _, ...mindmapWithoutId } = mindmap;
   await db.collection('maps').updateOne({ _id: objectId }, { $set: mindmapWithoutId });
   const savedMindmap = await db.collection('maps').findOne({ _id: objectId });

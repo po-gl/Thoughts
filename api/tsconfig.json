@@ -24,7 +24,9 @@
     "skipLibCheck": true
   },
   "include": [
-    "./src/**/*"
+    "./src/**/*",
+    "./test/**/*",
+    "./scripts/**/*"
   ],
   "ts-node": {
     "esm": true,
