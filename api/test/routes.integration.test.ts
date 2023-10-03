@@ -23,6 +23,7 @@ describe('integration for routes module', () => {
   });
 
   test('should return a expected list of endpoints for GET /', async () => {
+    // @ts-ignore
     const response = await agent.get('/');
     const body = response.text;
     const result = JSON.parse(body);
@@ -44,6 +45,7 @@ describe('integration for routes module', () => {
   describe('maps routes', () => {
 
     test('should get a list of mindmaps for GET /maps given an existing user', async () => {
+      // @ts-ignore
       const response = await agent.get('/maps').set('Cookie', ['user=tester']);
       const body = response.text;
       const result = JSON.parse(body, dateReviver);
@@ -53,6 +55,7 @@ describe('integration for routes module', () => {
     });
 
     test('should get an empty list for GET /maps on a non-existing user', async () => {
+      // @ts-ignore
       const response = await agent.get('/maps').set('Cookie', ['user=non-tester']);
       const body = response.text;
       const result = JSON.parse(body, dateReviver);
@@ -64,6 +67,7 @@ describe('integration for routes module', () => {
       const mindmap = await db.collection('maps').findOne({ user: 'tester' });
       const id = mindmap?._id.toString();
 
+      // @ts-ignore
       const response = await agent.get(`/maps/${id}`);
       const body = response.text;
       const result = JSON.parse(body, dateReviver);
@@ -76,12 +80,14 @@ describe('integration for routes module', () => {
   describe('ML generation routes', () => {
 
     test('should a generated string from OpenAI API for GET /ml/test', async () => {
+      // @ts-ignore
       const response = await agent.get('/ml/test');
       const message = response.text;
       expect(message).toBe('This is a test.');
     });
 
     test('should get a generated a graph from OpenAI API for POST /generate-mindmap', async () => {
+      // @ts-ignore
       const response = await agent.post('/generate-mindmap').send({ thoughts: ['test'], mapSize: 2 });
       const body = response.text;
       const result = JSON.parse(body);
@@ -92,6 +98,7 @@ describe('integration for routes module', () => {
     }, 20000);
 
     test('should get Bad Request for undefined body for POST /generate-mindmap', async () => {
+      // @ts-ignore
       const response = await agent.post('/generate-mindmap');
       const result = response.text;
 
