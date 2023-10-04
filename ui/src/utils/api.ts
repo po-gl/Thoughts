@@ -15,7 +15,7 @@ async function apiFetch(endpoint: string, method: string, data?: object) {
 
 async function fetchGeneratedGraph(thoughts: string[], mapSize: number) {
   try {
-    const response = await apiFetch('/generate-mindmap', 'POST', { thoughts, mapSize });
+    const response = await apiFetch('/ml/generate-mindmap', 'POST', { thoughts, mapSize });
     if (response.status !== 200) throw new ResponseError(response.statusText);
     const body = await response.text();
     const result = JSON.parse(body);

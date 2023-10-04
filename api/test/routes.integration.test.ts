@@ -32,7 +32,7 @@ describe('integration for routes module', () => {
     const expectedEndpoints = [
       '/maps',
       '/maps/:id',
-      '/generate-mindmap',
+      '/ml/generate-mindmap',
       '/ml/test',
     ];
     const actualEndpoints = result.endpoints.map((e) => e.endpoint);
@@ -88,7 +88,7 @@ describe('integration for routes module', () => {
 
     test('should get a generated a graph from OpenAI API for POST /generate-mindmap', async () => {
       // @ts-ignore
-      const response = await agent.post('/generate-mindmap').send({ thoughts: ['test'], mapSize: 2 });
+      const response = await agent.post('/ml/generate-mindmap').send({ thoughts: ['test'], mapSize: 2 });
       const body = response.text;
       const result = JSON.parse(body);
 
@@ -99,7 +99,7 @@ describe('integration for routes module', () => {
 
     test('should get Bad Request for undefined body for POST /generate-mindmap', async () => {
       // @ts-ignore
-      const response = await agent.post('/generate-mindmap');
+      const response = await agent.post('/ml/generate-mindmap');
       const result = response.text;
 
       expect(response.statusCode).toBe(400);

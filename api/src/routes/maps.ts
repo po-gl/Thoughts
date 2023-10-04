@@ -1,25 +1,7 @@
 import { Router } from 'express';
-import mindmap, { MindMap } from './mindmap.js';
-import ml from './ml.js';
-import bodyParser from 'body-parser';
-import cookieParser from 'cookie-parser';
+import mindmap, { MindMap } from '../mindmap.js';
 
-const routes: Router = Router();
-routes.use(cookieParser());
-routes.use(bodyParser.json());
-
-routes.get('/', async (_req, res) => {
-  const routeEndpoints = routes.stack
-    .map((layer) => layer.route)
-    .filter((route) => route !== undefined)
-    .map((route) => {
-      return {
-        endpoint: route.path,
-        methods: route.methods,
-      };
-    });
-  res.json({ endpoints: routeEndpoints });
-});
+const routes = Router();
 
 routes.get('/maps', async (req, res) => {
   try {
@@ -70,31 +52,6 @@ routes.delete('/maps/:id', async (req, res) => {
     res.send(wasDeleted);
   } catch (e) {
     res.status(500).json({ error: `Unable to delete map with id: ${req.params.id}` });
-  }
-});
-
-routes.post('/generate-mindmap', async (req, res) => {
-  const thoughts: string[] = req.body.thoughts;
-  const mapSize: number = req.body.mapSize;
-  if (thoughts === undefined || mapSize === undefined) {
-    res.status(400).send('Bad Request');
-    return;
-  }
-
-  try {
-    const map = await ml.generateMindmap(thoughts, mapSize);
-    res.send(map);
-  } catch (e) {
-    res.json({ error: 'Generated invalid JSON' });
-  }
-});
-
-routes.get('/ml/test', async (_req, res) => {
-  try {
-    const message = await ml.test();
-    res.send(message);
-  } catch (e) {
-    res.status(500).send('Error generating message');
   }
 });
 

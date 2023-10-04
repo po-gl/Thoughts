@@ -1,7 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import { closeConnectionToDB, connectToDB } from './db.js';
-import routes from './routes.js';
+import routes from './routes/routes.js';
 import { Server } from 'http';
 
 dotenv.config();
