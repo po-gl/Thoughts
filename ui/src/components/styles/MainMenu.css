@@ -5,24 +5,7 @@
   max-width: 18em;
   white-space: nowrap;
   z-index: 6;
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-}
-
-.main-menu-panel::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: var(--theme-color);
-  width: calc(100% + 1px);
-  height: calc(100% + 1px);
-  border-radius: calc(var(--radius) - 1px);
-  -webkit-transform: translate3d(2px, 2px, -1px);
-  transform: translate3d(5px, 5px, -1px);
+  box-shadow: 5px 5px 0 var(--theme-color) !important;
 }
 
 .main-menu-panel .divider {
