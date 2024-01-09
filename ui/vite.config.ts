@@ -6,7 +6,19 @@ import macrosPlugin from 'vite-plugin-babel-macros'
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
   return {
-    plugins: [react(), macrosPlugin()],
+    plugins: [
+      react(),
+      macrosPlugin(),
+      {
+        name: "configure-response-headers",
+        configureServer: (server) => {
+          server.middlewares.use((_req, res, next) => {
+            res.setHeader("Cross-Origin-Opener-Policy", "same-origin-allow-popups");
+            next();
+          });
+        }
+      }
+    ],
     server: {
       proxy: {
         '/api': {

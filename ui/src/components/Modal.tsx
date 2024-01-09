@@ -11,7 +11,7 @@ function Modal({ showing, onDismiss, actionName, onSubmit, children }: React.Pro
   if (!showing) return null;
   return (
     <>
-      <form onSubmit={(e) => {
+      <form onSubmit={ async (e) => {
         e.preventDefault();
         if (onSubmit !== undefined) {
           onSubmit();
