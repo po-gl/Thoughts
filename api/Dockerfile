@@ -8,9 +8,9 @@ RUN npm install
 
 COPY . .
 
-ENV API_PORT=8080
+ENV API_PORT=80
 
-EXPOSE 8080
+EXPOSE 80
 
 RUN npm run build
 

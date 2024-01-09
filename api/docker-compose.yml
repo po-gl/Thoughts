@@ -4,7 +4,13 @@ services:
   thoughts_server:
     build: .
     ports:
-      - "${API_PORT}:8080"
+      - "${API_PORT}:80"
     environment:
       - MONGO_DB_URI=${MONGO_DB_URI}
       - OPENAI_API_KEY=${OPENAI_API_KEY}
+    networks:
+      - thoughts_app
+
+networks:
+  thoughts_app:
+    external: true
