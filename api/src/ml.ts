@@ -6,7 +6,7 @@ import ml from './ml.js';
 dotenv.config();
 
 let openai: OpenAI;
-const model = 'gpt-4-0613';
+const model = 'gpt-4-1106-preview';
 
 const mindmapSchema = {
   'type': 'object',
