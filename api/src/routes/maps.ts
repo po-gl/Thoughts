@@ -5,10 +5,7 @@ const routes = Router();
 
 routes.get('/maps', async (req, res) => {
   try {
-    const user = req.cookies.user;
-    if (user === undefined) {
-      res.cookie('user', 'tester');
-    }
+    const user = req.credentials.identifier as string;
     const maps = await mindmap.list(user);
     res.send(maps);
   } catch (e) {
@@ -19,7 +16,8 @@ routes.get('/maps', async (req, res) => {
 routes.post('/maps', async (req, res) => {
   try {
     const map = req.body.mindmap as MindMap;
-    const savedMap = await mindmap.add(map);
+    const user = req.credentials.identifier as string;
+    const savedMap = await mindmap.add(map, user);
     res.json({ savedMap });
   } catch (e) {
     res.json({ error: 'Unable to save map' });
@@ -28,7 +26,8 @@ routes.post('/maps', async (req, res) => {
 
 routes.get('/maps/:id', async (req, res) => {
   try {
-    const map = await mindmap.get(req.params.id);
+    const user = req.credentials.identifier as string;
+    const map = await mindmap.get(req.params.id, user);
     res.send(map);
   } catch (e) {
     res.json({ error: `Unable to get map with id: ${req.params.id}` });
@@ -38,17 +37,18 @@ routes.get('/maps/:id', async (req, res) => {
 routes.put('/maps/:id', async (req, res) => {
   try {
     const map = req.body.mindmap as MindMap;
-    const updatedMap = await mindmap.update(req.params.id, map);
+    const user = req.credentials.identifier as string;
+    const updatedMap = await mindmap.update(req.params.id, map, user);
     res.send(updatedMap);
   } catch (e) {
-    console.error(e);
     res.status(500).json({ error: `Unable to update map with id: ${req.params.id}` });
   }
 });
 
 routes.delete('/maps/:id', async (req, res) => {
   try {
-    const wasDeleted = await mindmap.delete(req.params.id);
+    const user = req.credentials.identifier as string;
+    const wasDeleted = await mindmap.delete(req.params.id, user);
     res.send(wasDeleted);
   } catch (e) {
     res.status(500).json({ error: `Unable to delete map with id: ${req.params.id}` });

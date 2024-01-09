@@ -8,6 +8,7 @@
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "baseUrl": "./",
+    "typeRoots": ["./types"],
     "paths": {
       "*": [
         "./node_modules/*"

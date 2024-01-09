@@ -1,15 +1,20 @@
 import { Router } from 'express';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
+import authRoutes from './auth.js';
 import mapRoutes from './maps.js';
 import mlRoutes from './ml.js';
+import { mustBeSignedIn } from '../auth.js';
 
 const routes: Router = Router();
 routes.use(cookieParser());
 routes.use(bodyParser.json());
 
-routes.use(mapRoutes);
+routes.use(authRoutes);
 routes.use(mlRoutes);
+
+routes.use(mustBeSignedIn);
+routes.use(mapRoutes);
 
 routes.get('/', async (_req, res) => {
   const routesList = [ mapRoutes, mlRoutes ];
