@@ -226,6 +226,10 @@ input[type="checkbox"]:checked::before {
     padding-block: 0.2em;
   }
 
+  .progress {
+    font-size: 0.7em;
+  }
+
   button:hover {
     background-color: transparent;
   }
