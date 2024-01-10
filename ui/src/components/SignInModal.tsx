@@ -6,7 +6,7 @@ import { apiFetch } from '../utils/api.ts';
 import './styles/SignInModal.css';
 import { User } from './MainMenu.tsx';
 
-const GOOGLE_CLIENT_ID = '641837944135-7ilgk5sthotoqpus6v8imu6g5a4v17su.apps.googleusercontent.com';
+const GOOGLE_CLIENT_ID = '933701722173-hc0go2j56cjo66i2ns4bsnfg7jh864lj.apps.googleusercontent.com';
 
 type Props = {
   showing: boolean;
