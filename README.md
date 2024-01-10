@@ -3,7 +3,7 @@ A GPT-4 thought organizing web app
 
 Try it out at [thoughts.porterglines.com](https://thoughts.porterglines.com)
 
-`Thoughts` is a web app that generates [mind maps](https://en.wikipedia.org/wiki/Mind_map) using OpenAI's GPT API (`gpt-4-0613`).
+`Thoughts` is a web app that generates [mind maps](https://en.wikipedia.org/wiki/Mind_map) using OpenAI's GPT API (`gpt-4-1106-preview`).
 Start with a list of thoughts, and OpenAI's [GPT-4](https://openai.com/research/gpt-4) model will connect the ideas and extend the map with related topics.
 Manipulate nodes using a familiar and performant node-based editor built using the [React Flow library](https://reactflow.dev).
 Organize your thoughts, explore new topics through generation, and break down complex ideas and associations.
