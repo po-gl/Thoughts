@@ -43,23 +43,34 @@ function SignInModal( { showing, setShowing, user, setUser, setShouldRefreshMaps
   }
 
   function initializeGoogleSignIn() {
-    google.accounts.id.initialize({
-      client_id: GOOGLE_CLIENT_ID,
-      callback: (response) => {
-        signInWithGoogle(response);
-      },
-    });
+    if (typeof google !== 'undefined') {
+      google.accounts.id.initialize({
+        client_id: GOOGLE_CLIENT_ID,
+        callback: (response) => {
+          signInWithGoogle(response);
+        },
+      });
+    }
   }
 
   function renderButtons() {
     if (googleSignInButton.current !== null) {
-      google.accounts.id.renderButton(googleSignInButton.current, {
-        type: 'standard',
-        shape: 'pill',
-        theme: 'filled_black',
-        text: 'signin_with',
-        size: 'large',
-      });
+      if (typeof google !== 'undefined') {
+        google.accounts.id.renderButton(googleSignInButton.current, {
+          type: 'standard',
+          shape: 'pill',
+          theme: 'filled_black',
+          text: 'signin_with',
+          size: 'large',
+        });
+      } else {
+        const signInButtonErrorMsg = document.createElement('p');
+        signInButtonErrorMsg.textContent = 'Unable to access Google Sign in button.';
+        const signInButtonAdvice = document.createElement('p');
+        signInButtonAdvice.textContent = 'Try disabling content blockers.';
+        googleSignInButton.current.appendChild(signInButtonErrorMsg);
+        googleSignInButton.current.appendChild(signInButtonAdvice);
+      }
     }
   }
 
