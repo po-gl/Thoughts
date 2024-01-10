@@ -8,6 +8,9 @@ services:
     environment:
       - MONGO_DB_URI=${MONGO_DB_URI}
       - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - JWT_SECRET=${JWT_SECRET}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
     networks:
       - thoughts_app
 
