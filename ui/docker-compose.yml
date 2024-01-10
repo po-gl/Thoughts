@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  thoughts_proxy_server:
+    image: thoughts_proxy_server
+    build: .
+    ports:
+      - "${UI_PORT}:80"
+    networks:
+      - thoughts_app
+
+networks:
+  thoughts_app:
+    external: true
+  nginx_network:
+    external: true
