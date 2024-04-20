@@ -3,7 +3,7 @@
  * localhost:
  *   mongosh thoughtorganizer scripts/init.mongo.js
  * Atlas:
- *   mongosh mongodb+srv://user:pwd@xxx.mongodb.net/thoughtorganizer scripts/init.mongo.js
+ *   mongosh CONNECTION_STRING scripts/init.mongo.js
 */
 
 /* global db print */
