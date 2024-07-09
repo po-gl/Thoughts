@@ -59,13 +59,14 @@ describe('mindmap module', () => {
     test('should get a mind map using id', async () => {
       await db.collection('maps').insertOne(exampleMindmap);
       const id = exampleMindmap._id.toString();
+      const user = exampleMindmap.user;
 
-      const foundMindmap = await mindmap.get(id);
+      const foundMindmap = await mindmap.get(id, user);
       expect(foundMindmap).toEqual(exampleMindmap);
     });
 
     test('should add a mind map', async () => {
-      const addedMindmap = await mindmap.add(exampleMindmap);
+      const addedMindmap = await mindmap.add(exampleMindmap, exampleMindmap.user);
 
       const insertedMindmap = await db.collection('maps').findOne({ user: 'tester' });
       expect(insertedMindmap).toEqual(addedMindmap);
@@ -74,8 +75,9 @@ describe('mindmap module', () => {
     test('should update a mind map', async () => {
       await db.collection('maps').insertOne(exampleMindmap);
       const id = exampleMindmap._id.toString();
+      const user = exampleMindmap.user;
 
-      const updatedMindmap = await mindmap.update(id, { ...exampleMindmap, title: 'Updated title' });
+      const updatedMindmap = await mindmap.update(id, { ...exampleMindmap, title: 'Updated title' }, user);
       const foundMindmap = await db.collection('maps').findOne({ _id: exampleMindmap._id });
       expect(foundMindmap).toEqual(updatedMindmap);
     });
@@ -83,8 +85,9 @@ describe('mindmap module', () => {
     test('should delete a mind map', async () => {
       await db.collection('maps').insertOne(exampleMindmap);
       const id = exampleMindmap._id.toString();
+      const user = exampleMindmap.user;
 
-      const result = await mindmap.delete(id);
+      const result = await mindmap.delete(id, user);
       expect(result).toBe(true);
       expect(await db.collection('maps').countDocuments()).toBe(0);
       expect(await db.collection('deleted_maps').countDocuments()).toBe(1);
@@ -94,17 +97,19 @@ describe('mindmap module', () => {
 
     test('try to delete a mind map that does not exist', async () => {
       await db.collection('maps').insertOne(exampleMindmap);
+      const user = exampleMindmap.user;
 
-      const result = await mindmap.delete((new ObjectId()).toString());
+      const result = await mindmap.delete((new ObjectId()).toString(), user);
       expect(result).toBe(false);
     });
 
     test('should restore a mind map', async () => {
       await db.collection('maps').insertOne(exampleMindmap);
       const id = exampleMindmap._id.toString();
-      await mindmap.delete(id);
+      const user = exampleMindmap.user;
+      await mindmap.delete(id, user);
 
-      const result = await mindmap.restore(id);
+      const result = await mindmap.restore(id, user);
       expect(result).toBe(true);
       expect(await db.collection('maps').countDocuments()).toBe(1);
       expect(await db.collection('deleted_maps').countDocuments()).toBe(0);
@@ -115,9 +120,10 @@ describe('mindmap module', () => {
     test('try to restore a mind map that does not exist', async () => {
       await db.collection('maps').insertOne(exampleMindmap);
       const id = exampleMindmap._id.toString();
-      await mindmap.delete(id);
+      const user = exampleMindmap.user;
+      await mindmap.delete(id, user);
 
-      const result = await mindmap.restore((new ObjectId()).toString());
+      const result = await mindmap.restore((new ObjectId()).toString(), user);
       expect(result).toBe(false);
     });
   });
